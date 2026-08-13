@@ -192,7 +192,7 @@ Assign a professional color from these options:
 
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
-      server: { middlewareMode: true, allowedHosts: 'all' },
+      server: { middlewareMode: true, allowedHosts: true },
       appType: "spa",
     });
     anonymityApp.use(vite.middlewares);

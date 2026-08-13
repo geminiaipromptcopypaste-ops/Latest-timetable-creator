@@ -111,52 +111,56 @@
         --border-radius: 12px;
         --font-size: 14px;
 
-        /* Standard Premium Teal/Slate Theme Palette (from Image) */
-        --primary-color: #0d9488; /* Teal 600 */
-        --primary-glow: rgba(13, 148, 136, 0.15);
-        --bg-app: #f2fafb; /* Softest clean mint/teal matching image background */
+        /* Just Violet, White and Black Theme Palette */
+        --primary-color: #7c3aed; /* Premium Violet */
+        --primary-glow: rgba(124, 58, 237, 0.15);
+        --bg-app: #ffffff; /* Crisp white background */
         --bg-card: #ffffff; /* Crisp white cards */
-        --bg-panel: #e6f4f5; /* Light mint/teal panel background */
-        --text-main: #0a3339; /* Deep slate teal for ultra-clean contrast text */
-        --text-muted: #53777d; /* Friendly slate-teal for muted elements */
-        --text-inverse: #ffffff;
-        --border-color: #d1ebeb; /* Light mint borders */
-        --grid-line-color: rgba(209, 235, 235, 0.5);
-        --shadow-sm: 0 1px 3px 0 rgba(10, 51, 57, 0.04);
-        --shadow-md: 0 8px 16px -4px rgba(10, 51, 57, 0.08), 0 4px 6px -2px rgba(10, 51, 57, 0.03);
-        --shadow-lg: 0 20px 25px -5px rgba(10, 51, 57, 0.08), 0 10px 10px -5px rgba(10, 51, 57, 0.03);
-        --accent-glow: rgba(13, 148, 136, 0.25);
+        --bg-panel: #faf5ff; /* Softest violet-tinted white panel background */
+        --text-main: #000000; /* Rich pure black for supreme contrast */
+        --text-muted: #6b7280; /* Neutral grey (mix of white and black) */
+        --text-inverse: #ffffff; /* White */
+        --border-color: #ddd6fe; /* Soft violet border */
+        --grid-line-color: rgba(221, 214, 254, 0.4);
+        --shadow-sm: 0 1px 3px 0 rgba(124, 58, 237, 0.04);
+        --shadow-md: 0 8px 16px -4px rgba(124, 58, 237, 0.08), 0 4px 6px -2px rgba(124, 58, 237, 0.03);
+        --shadow-lg: 0 20px 25px -5px rgba(124, 58, 237, 0.08), 0 10px 10px -5px rgba(124, 58, 237, 0.03);
+        --accent-glow: rgba(124, 58, 237, 0.25);
 
-        /* Soft event color palette */
-        --evt-color-1: #0d9488; /* Vibrant Teal/Mint (PE, Music, general courses) */
-        --evt-color-2: #10b981; /* Emerald Green */
-        --evt-color-3: #8b5cf6; /* Violet */
-        --evt-color-4: #f59e0b; /* Amber Orange (English, Library) */
-        --evt-color-5: #ec4899; /* Pink */
-        --evt-color-6: #14b8a6; /* Menthol Mint */
-        --evt-color-7: #f87171; /* Soft Coral Red (Art class) */
-        --evt-color-8: #64748b; /* History Slate */
+        /* Soft event color palette restricted to Violet, White and Black shades/tints */
+        --evt-color-1: #7c3aed; /* Violet Primary */
+        --evt-color-2: #4c1d95; /* Deep Midnight Violet */
+        --evt-color-3: #a78bfa; /* Light Lavender-Violet */
+        --evt-color-4: #000000; /* Pure Black */
+        --evt-color-5: #6d28d9; /* Deep Violet */
+        --evt-color-6: #c084fc; /* Medium Light Lavender */
+        --evt-color-7: #1e1b4b; /* Deep Dark Violet-Black */
+        --evt-color-8: #ddd6fe; /* Very Soft Lavender-Violet */
       }
 
       /* Dark Theme Palettes */
       [data-theme="dark"] {
-        --bg-app: #071113; /* Deep obsidian teal */
-        --bg-card: #0b1a1c; /* Dark teal card */
-        --bg-panel: #112629; /* Tech panel background */
-        --text-main: #f0fdfa; /* Crisp off-white running into light mint */
-        --text-muted: #80a4a7; /* Muted tech teal */
-        --border-color: #1a3c40; /* Subdued teal borders */
-        --grid-line-color: rgba(26, 60, 64, 0.45);
-        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
-        --shadow-md: 0 8px 16px -4px rgba(0, 0, 0, 0.5);
-        --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.6);
+        --primary-color: #a78bfa; /* Lighter violet for dark mode contrast */
+        --primary-glow: rgba(167, 139, 250, 0.15);
+        --bg-app: #000000; /* Pure Black Background */
+        --bg-card: #000000; /* Pure Black Cards */
+        --bg-panel: #0b0b0f; /* Extremely dark black/violet panel */
+        --text-main: #ffffff; /* Crisp pure white text */
+        --text-muted: #9ca3af; /* Soft grey text */
+        --text-inverse: #000000; /* Black for inverse */
+        --border-color: #2e1065; /* Dark violet border */
+        --grid-line-color: rgba(46, 16, 101, 0.4);
+        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.8);
+        --shadow-md: 0 8px 16px -4px rgba(0, 0, 0, 0.9);
+        --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.95);
       }
 
       /* Preset Themes Updates */
-      [data-preset="emerald"] { --primary-color: #10b981; --primary-glow: rgba(16, 185, 129, 0.15); }
-      [data-preset="indigo"] { --primary-color: #6366f1; --primary-glow: rgba(99, 102, 241, 0.15); }
-      [data-preset="amber"] { --primary-color: #f59e0b; --primary-glow: rgba(245, 158, 11, 0.15); }
-      [data-preset="cyberpunk"] { --primary-color: #ff007f; --primary-glow: rgba(255, 0, 127, 0.15); }
+      [data-preset="slate"] { --primary-color: #7c3aed; --primary-glow: rgba(124, 58, 237, 0.15); }
+      [data-preset="emerald"] { --primary-color: #6d28d9; --primary-glow: rgba(109, 40, 217, 0.15); }
+      [data-preset="indigo"] { --primary-color: #4c1d95; --primary-glow: rgba(76, 29, 149, 0.15); }
+      [data-preset="amber"] { --primary-color: #000000; --primary-glow: rgba(0, 0, 0, 0.15); }
+      [data-preset="cyberpunk"] { --primary-color: #a78bfa; --primary-glow: rgba(167, 139, 250, 0.15); }
 
       /* Reset & Global elements */
       * {
@@ -224,8 +228,8 @@
       }
 
       .brand-logo {
-        background: linear-gradient(135deg, var(--primary-color), #3b82f6);
-        color: var(--text-inverse);
+        background: linear-gradient(135deg, #71717a, #3f3f46); /* Grey coloured gradient */
+        color: #ffffff; /* Contrast white letter */
         width: 38px;
         height: 38px;
         border-radius: 10px;
@@ -1646,11 +1650,11 @@
             <div class="form-group">
               <label for="configTheme">Theme Palette</label>
               <select id="configTheme" class="select-ctrl" onchange="app.handlers.presetChange()">
-                <option value="slate">Slate Standard</option>
-                <option value="emerald">Emerald Forest</option>
-                <option value="indigo">High Indigo</option>
-                <option value="amber">Warm Amber</option>
-                <option value="cyberpunk">Cyberpunk Neon</option>
+                <option value="slate">Royal Violet (Default)</option>
+                <option value="emerald">Deep Amethyst</option>
+                <option value="indigo">Midnight Violet</option>
+                <option value="amber">Obsidian Black</option>
+                <option value="cyberpunk">Ethereal Lavender</option>
               </select>
             </div>
             <div class="tuning-sliders">
@@ -3212,14 +3216,14 @@
          * Color assignments arrays helpers
          */
         colorsList: [
-          '#3b82f6', // Blue
-          '#10b981', // Emerald
-          '#8b5cf6', // Violet
-          '#f59e0b', // Amber
-          '#ec4899', // Pink
-          '#14b8a6', // Teal
-          '#f97316', // Orange
-          '#64748b'  // Slate
+          '#7c3aed', // Royal Violet
+          '#8b5cf6', // Medium Violet
+          '#a78bfa', // Soft Violet-Lavender
+          '#c084fc', // Light Violet-Purple
+          '#4c1d95', // Deep Midnight Violet
+          '#6d28d9', // Rich Amethyst Violet
+          '#000000', // Pure Black
+          '#1e1b4b'  // Obsidian Violet-Black
         ],
 
         /**

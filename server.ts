@@ -52,10 +52,39 @@ async function startServer() {
     res.sendFile(filePath);
   });
 
-  anonymityApp.get("/terms.html", (req, res) => {
+  // Explicitly serve blog page subfolders
+  anonymityApp.get(["/blog/terms-and-conditions", "/blog/terms-and-conditions/"], (req, res) => {
     const filePath = process.env.NODE_ENV === "production" 
-      ? path.join(process.cwd(), "dist", "terms.html")
-      : path.join(process.cwd(), "public", "terms.html");
+      ? path.join(process.cwd(), "dist", "blog", "terms-and-conditions", "index.html")
+      : path.join(process.cwd(), "public", "blog", "terms-and-conditions", "index.html");
+    res.sendFile(filePath);
+  });
+
+  anonymityApp.get(["/blog/about-us", "/blog/about-us/"], (req, res) => {
+    const filePath = process.env.NODE_ENV === "production" 
+      ? path.join(process.cwd(), "dist", "blog", "about-us", "index.html")
+      : path.join(process.cwd(), "public", "blog", "about-us", "index.html");
+    res.sendFile(filePath);
+  });
+
+  anonymityApp.get(["/blog/disclaimer", "/blog/disclaimer/"], (req, res) => {
+    const filePath = process.env.NODE_ENV === "production" 
+      ? path.join(process.cwd(), "dist", "blog", "disclaimer", "index.html")
+      : path.join(process.cwd(), "public", "blog", "disclaimer", "index.html");
+    res.sendFile(filePath);
+  });
+
+  anonymityApp.get(["/blog/privacy-policy", "/blog/privacy-policy/"], (req, res) => {
+    const filePath = process.env.NODE_ENV === "production" 
+      ? path.join(process.cwd(), "dist", "blog", "privacy-policy", "index.html")
+      : path.join(process.cwd(), "public", "blog", "privacy-policy", "index.html");
+    res.sendFile(filePath);
+  });
+
+  anonymityApp.get(["/blog/contact-us", "/blog/contact-us/"], (req, res) => {
+    const filePath = process.env.NODE_ENV === "production" 
+      ? path.join(process.cwd(), "dist", "blog", "contact-us", "index.html")
+      : path.join(process.cwd(), "public", "blog", "contact-us", "index.html");
     res.sendFile(filePath);
   });
 

@@ -7,7 +7,31 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://timetablecreator.online/terms.html</loc>
+    <loc>https://timetablecreator.online/blog/terms-and-conditions/</loc>
+    <lastmod>2026-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://timetablecreator.online/blog/about-us/</loc>
+    <lastmod>2026-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://timetablecreator.online/blog/disclaimer/</loc>
+    <lastmod>2026-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://timetablecreator.online/blog/privacy-policy/</loc>
+    <lastmod>2026-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://timetablecreator.online/blog/contact-us/</loc>
     <lastmod>2026-08-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>

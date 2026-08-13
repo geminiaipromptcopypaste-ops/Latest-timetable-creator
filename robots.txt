@@ -1,0 +1,10 @@
+User-agent: *
+
+Disallow: /api/
+Disallow: /src/
+Disallow: /firebase-applet-config.json
+Disallow: /*.tsx$
+Disallow: /*.ts$
+
+
+Sitemap: https://timetablecreator.online/sitemap.xml

@@ -52,6 +52,13 @@ async function startServer() {
     res.sendFile(filePath);
   });
 
+  anonymityApp.get("/terms.html", (req, res) => {
+    const filePath = process.env.NODE_ENV === "production" 
+      ? path.join(process.cwd(), "dist", "terms.html")
+      : path.join(process.cwd(), "public", "terms.html");
+    res.sendFile(filePath);
+  });
+
   // Handle api.php for saving/loading shared timetables
   anonymityApp.all("/api.php", (req, res) => {
     if (req.method === 'POST') {

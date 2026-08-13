@@ -179,6 +179,8 @@
         overflow: hidden;
         height: 100vh;
         width: 100vw;
+        display: flex;
+        flex-direction: column;
         transition: background-color 0.3s, color 0.3s;
       }
 
@@ -202,7 +204,8 @@
       .app-container {
         display: flex;
         width: 100vw;
-        height: 100vh;
+        flex: 1;
+        height: 0;
         overflow: hidden;
       }
 
@@ -1514,6 +1517,396 @@
         font-size: 11px;
         color: var(--text-muted);
       }
+
+      /* --- PREMIUM RESPONSIVE HEADER STYLES --- */
+      .global-header {
+        height: 64px;
+        background-color: var(--bg-card);
+        border-bottom: 1px solid var(--border-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: sticky;
+        top: 0;
+        z-index: 998;
+        transition: background-color 0.3s, border-color 0.3s;
+      }
+      .header-container {
+        width: 100%;
+        max-width: 1440px;
+        margin: 0 auto;
+        padding: 0 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 100%;
+        position: relative;
+      }
+      .header-brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .header-logo {
+        width: 38px;
+        height: 38px;
+        object-fit: contain;
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+      }
+      .header-title-group {
+        display: flex;
+        flex-direction: column;
+      }
+      .header-title {
+        font-family: 'Outfit', sans-serif !important;
+        font-size: 16px !important;
+        font-weight: 700 !important;
+        color: var(--text-main) !important;
+        margin: 0 !important;
+        line-height: 1.2 !important;
+        letter-spacing: -0.02em !important;
+      }
+      .header-subtitle {
+        font-size: 11px !important;
+        color: var(--text-muted) !important;
+        margin: 0 !important;
+        font-weight: 500 !important;
+      }
+      .header-nav-desktop {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-left: 24px;
+        flex: 1;
+      }
+      .nav-link-header {
+        font-size: 13.5px;
+        font-weight: 500;
+        color: var(--text-muted);
+        text-decoration: none;
+        padding: 6px 12px;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+      }
+      .nav-link-header:hover {
+        color: var(--primary-color);
+        background-color: var(--primary-glow);
+      }
+      .nav-link-header.active {
+        color: var(--primary-color);
+        background-color: var(--primary-glow);
+        font-weight: 600;
+      }
+      .header-actions-desktop {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .action-btn-header {
+        background: none;
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-main);
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      .action-btn-header:hover {
+        background-color: var(--bg-panel);
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+      }
+      .header-auth-group {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .btn-signin-header {
+        background: none;
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text-main);
+        padding: 8px 16px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      .btn-signin-header:hover {
+        background-color: var(--bg-panel);
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+      }
+      .btn-signup-header {
+        background-color: var(--primary-color);
+        border: 1px solid var(--primary-color);
+        border-radius: 10px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #ffffff;
+        padding: 8px 16px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-shadow: var(--shadow-sm);
+      }
+      .btn-signup-header:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-md);
+      }
+      .user-avatar-trigger {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        padding: 4px 10px;
+        border-radius: var(--border-radius);
+        border: 1px solid var(--border-color);
+        transition: all 0.2s ease;
+        background-color: var(--bg-panel);
+        position: relative;
+      }
+      .user-avatar-trigger:hover {
+        border-color: var(--primary-color);
+      }
+      .user-avatar-bubble {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background-color: var(--primary-color);
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 11px;
+        text-transform: uppercase;
+      }
+      .user-email-label {
+        font-size: 12.5px;
+        font-weight: 500;
+        color: var(--text-main);
+        max-width: 140px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .header-dropdown {
+        position: absolute;
+        right: 0;
+        top: 44px;
+        background-color: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow-lg);
+        min-width: 200px;
+        padding: 12px;
+        z-index: 1010;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .dropdown-email {
+        font-size: 11px;
+        color: var(--text-muted);
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 8px;
+        word-break: break-all;
+        text-align: left;
+      }
+      .dropdown-sync {
+        font-size: 11px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--text-muted);
+        padding: 2px 0;
+        text-align: left;
+      }
+      .sync-dot {
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: var(--text-muted);
+      }
+      .dropdown-btn {
+        background: none;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        font-size: 12px;
+        font-weight: 500;
+        padding: 6px 12px;
+        text-align: center;
+        cursor: pointer;
+        color: var(--text-main);
+        transition: all 0.2s ease;
+      }
+      .dropdown-btn:hover {
+        background-color: var(--bg-panel);
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+      }
+      .dropdown-btn.danger {
+        color: #ef4444;
+        border-color: rgba(239, 68, 68, 0.2);
+      }
+      .dropdown-btn.danger:hover {
+        background-color: rgba(239, 68, 68, 0.05);
+        border-color: #ef4444;
+        color: #ef4444;
+      }
+      .header-mobile-toggle {
+        display: none;
+        background: none;
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        width: 38px;
+        height: 38px;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-main);
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      .header-mobile-toggle:hover {
+        background-color: var(--bg-panel);
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+      }
+      .mobile-menu-drawer {
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        background-color: var(--bg-card);
+        border-bottom: 1px solid var(--border-color);
+        box-shadow: var(--shadow-lg);
+        padding: 20px;
+        z-index: 997;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        border-radius: 0 0 16px 16px;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .mobile-nav-links {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .mobile-nav-link {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text-muted);
+        text-decoration: none;
+        padding: 10px 14px;
+        border-radius: 10px;
+        transition: all 0.2s ease;
+      }
+      .mobile-nav-link:hover, .mobile-nav-link.active {
+        color: var(--primary-color);
+        background-color: var(--primary-glow);
+        font-weight: 600;
+      }
+      .mobile-menu-divider {
+        height: 1px;
+        background-color: var(--border-color);
+      }
+      .mobile-menu-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .mobile-action-btn {
+        display: flex;
+        align-items: center;
+        background: none;
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        padding: 10px 14px;
+        font-size: 13.5px;
+        font-weight: 500;
+        color: var(--text-main);
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      .mobile-action-btn:hover {
+        background-color: var(--bg-panel);
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+      }
+      .mobile-auth-container {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .btn-signin-mobile {
+        background: none;
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        font-size: 13.5px;
+        font-weight: 600;
+        color: var(--text-main);
+        padding: 10px;
+        cursor: pointer;
+        text-align: center;
+        transition: all 0.2s ease;
+      }
+      .btn-signin-mobile:hover {
+        background-color: var(--bg-panel);
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+      }
+      .btn-signup-mobile {
+        background-color: var(--primary-color);
+        border: 1px solid var(--primary-color);
+        border-radius: 10px;
+        font-size: 13.5px;
+        font-weight: 600;
+        color: #ffffff;
+        padding: 10px;
+        cursor: pointer;
+        text-align: center;
+        transition: all 0.2s ease;
+        box-shadow: var(--shadow-sm);
+      }
+      .btn-signup-mobile:hover {
+        opacity: 0.95;
+      }
+      .mobile-user-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 12px;
+        border-radius: 10px;
+        background-color: var(--bg-panel);
+        border: 1px solid var(--border-color);
+      }
+      .mobile-email-label {
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--text-main);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      @media (max-width: 1024px) {
+        .header-nav-desktop, .header-actions-desktop {
+          display: none !important;
+        }
+        .header-mobile-toggle {
+          display: flex !important;
+        }
+      }
     </style>
   </head>
   <body>
@@ -1544,6 +1937,104 @@
 
     <!-- Active Toast Notifications -->
     <div id="toastContainer" class="toast-container"></div>
+
+    <!-- PREMIUM GLOBAL NAVIGATION HEADER -->
+    <header class="global-header">
+      <div class="header-container">
+        <!-- Left Section: Logo & Brand -->
+        <a href="/" class="header-brand">
+          <img src="/logo.png" alt="Timetable Creator Logo" class="header-logo" referrerPolicy="no-referrer">
+          <div class="header-title-group">
+            <h1 class="header-title">Timetable Creator</h1>
+            <p class="header-subtitle">Online Class Scheduler</p>
+          </div>
+        </a>
+
+        <!-- Middle Section: Nav links (Desktop) -->
+        <nav class="header-nav-desktop">
+          <a href="/" class="nav-link-header active">Workspace</a>
+          <a href="/blog/about-us/" class="nav-link-header">About Us</a>
+          <a href="/blog/contact-us/" class="nav-link-header">Contact Us</a>
+          <a href="/blog/privacy-policy/" class="nav-link-header">Privacy Policy</a>
+        </nav>
+
+        <!-- Right Section: Actions & Auth (Desktop) -->
+        <div class="header-actions-desktop">
+          <!-- Light/Dark Mode Toggle in Header -->
+          <button class="action-btn-header" onclick="app.handlers.toggleDark()" data-tooltip="Toggle theme mode">
+            <svg id="themeToggleIconHeader" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="20" height="20">
+              <path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+            </svg>
+          </button>
+
+          <!-- Auth Buttons -->
+          <div id="unauthGroupHeader" class="header-auth-group">
+            <button class="btn-signin-header" onclick="app.handlers.openAuthModal()">Sign In</button>
+            <button class="btn-signup-header" onclick="app.handlers.openAuthSignUp()">Sign Up</button>
+          </div>
+
+          <div id="authGroupHeader" class="header-auth-group hidden" style="position: relative;">
+            <div class="user-avatar-trigger" onclick="app.handlers.toggleUserDropdownHeader()">
+              <div id="userAvatarHeader" class="user-avatar-bubble">?</div>
+              <span id="userEmailLabelHeader" class="user-email-label">...</span>
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="14" height="14" style="color: var(--text-muted);"><path d="M19 9l-7 7-7-7"></path></svg>
+            </div>
+            
+            <!-- Dropdown menu -->
+            <div id="userDropdownMenuHeader" class="header-dropdown hidden">
+              <div class="dropdown-email" id="userDropdownEmailHeader">Loading...</div>
+              <div class="dropdown-sync" id="syncBadgeHeader">
+                <span class="sync-dot" style="display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--text-muted);"></span>
+                <span id="syncBadgeTextHeader">Sync Offline</span>
+              </div>
+              <button class="dropdown-btn" onclick="app.handlers.syncWithCloud()">Save to Cloud</button>
+              <button class="dropdown-btn danger" onclick="app.handlers.signOutUser()">Sign Out</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile Navigation Toggle Button -->
+        <button class="header-mobile-toggle" onclick="app.handlers.toggleMobileMenu()" aria-label="Toggle menu">
+          <svg id="mobileMenuIcon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="24" height="24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Drawer Menu (Slide Down) -->
+      <div id="mobileMenuDrawer" class="mobile-menu-drawer hidden">
+        <nav class="mobile-nav-links">
+          <a href="/" class="mobile-nav-link active" onclick="app.handlers.toggleMobileMenu()">Workspace</a>
+          <a href="/blog/about-us/" class="mobile-nav-link" onclick="app.handlers.toggleMobileMenu()">About Us</a>
+          <a href="/blog/contact-us/" class="mobile-nav-link" onclick="app.handlers.toggleMobileMenu()">Contact Us</a>
+          <a href="/blog/privacy-policy/" class="mobile-nav-link" onclick="app.handlers.toggleMobileMenu()">Privacy Policy</a>
+        </nav>
+        <div class="mobile-menu-divider"></div>
+        <div class="mobile-menu-actions">
+          <!-- Theme mode toggle in mobile menu -->
+          <button class="mobile-action-btn" onclick="app.handlers.toggleDark(); app.handlers.toggleMobileMenu();" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px;">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="18" height="18">
+              <path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+            </svg>
+            Theme Mode Toggle
+          </button>
+
+          <!-- Auth section inside mobile menu -->
+          <div id="unauthGroupMobile" class="mobile-auth-container">
+            <button class="btn-signin-mobile" onclick="app.handlers.openAuthModal(); app.handlers.toggleMobileMenu();">Sign In</button>
+            <button class="btn-signup-mobile" onclick="app.handlers.openAuthSignUp(); app.handlers.toggleMobileMenu();">Sign Up</button>
+          </div>
+          <div id="authGroupMobile" class="mobile-auth-container hidden">
+            <div class="mobile-user-info">
+              <div id="userAvatarMobile" class="user-avatar-bubble">?</div>
+              <span id="userEmailLabelMobile" class="mobile-email-label">...</span>
+            </div>
+            <button class="mobile-action-btn" onclick="app.handlers.syncWithCloud(); app.handlers.toggleMobileMenu();" style="justify-content: center; margin-top: 4px;">Save to Cloud</button>
+            <button class="mobile-action-btn danger" onclick="app.handlers.signOutUser(); app.handlers.toggleMobileMenu();" style="justify-content: center; margin-top: 4px;">Sign Out</button>
+          </div>
+        </div>
+      </div>
+    </header>
 
     <!-- MAIN APP WRAPPER -->
     <div class="app-container" id="timetableApp">
@@ -2441,25 +2932,65 @@
                 const emailEl = document.getElementById('userEmailLabel');
                 const avatarEl = document.getElementById('userAvatar');
 
+                // Header elements
+                const unauthElHeader = document.getElementById('unauthGroupHeader');
+                const authElHeader = document.getElementById('authGroupHeader');
+                const emailElHeader = document.getElementById('userEmailLabelHeader');
+                const emailElDropdownHeader = document.getElementById('userDropdownEmailHeader');
+                const avatarElHeader = document.getElementById('userAvatarHeader');
+
+                // Mobile elements
+                const unauthElMobile = document.getElementById('unauthGroupMobile');
+                const authElMobile = document.getElementById('authGroupMobile');
+                const emailElMobile = document.getElementById('userEmailLabelMobile');
+                const avatarElMobile = document.getElementById('userAvatarMobile');
+
                 if (user) {
                   if (unauthEl) unauthEl.classList.add('hidden');
                   if (authEl) authEl.classList.remove('hidden');
                   if (emailEl) emailEl.textContent = user.email;
+
+                  if (unauthElHeader) unauthElHeader.classList.add('hidden');
+                  if (authElHeader) authElHeader.classList.remove('hidden');
+                  if (emailElHeader) emailElHeader.textContent = user.email.split('@')[0];
+                  if (emailElDropdownHeader) emailElDropdownHeader.textContent = user.email;
+
+                  if (unauthElMobile) unauthElMobile.classList.add('hidden');
+                  if (authElMobile) authElMobile.classList.remove('hidden');
+                  if (emailElMobile) emailElMobile.textContent = user.email;
                   
                   const initials = user.email ? user.email.substring(0, 2).toUpperCase() : 'U';
                   if (avatarEl) {
                     avatarEl.textContent = initials;
                     avatarEl.style.backgroundColor = 'var(--primary-color)';
                   }
+                  if (avatarElHeader) {
+                    avatarElHeader.textContent = initials;
+                    avatarElHeader.style.backgroundColor = 'var(--primary-color)';
+                  }
+                  if (avatarElMobile) {
+                    avatarElMobile.textContent = initials;
+                    avatarElMobile.style.backgroundColor = 'var(--primary-color)';
+                  }
 
                   // Update sync badge
                   const syncBText = document.getElementById('syncBadgeText');
                   const syncB = document.getElementById('syncBadge');
+                  const syncBTextHeader = document.getElementById('syncBadgeTextHeader');
+                  const syncBHeader = document.getElementById('syncBadgeHeader');
+
                   if (syncBText) syncBText.textContent = 'Synced to Cloud';
+                  if (syncBTextHeader) syncBTextHeader.textContent = 'Synced to Cloud';
+
                   if (syncB) {
                     syncB.style.color = '#10b981';
                     const badgeDot = document.querySelector('#syncBadge span');
                     if (badgeDot) badgeDot.style.backgroundColor = '#10b981';
+                  }
+                  if (syncBHeader) {
+                    syncBHeader.style.color = '#10b981';
+                    const badgeDotHeader = document.querySelector('#syncBadgeHeader span');
+                    if (badgeDotHeader) badgeDotHeader.style.backgroundColor = '#10b981';
                   }
 
                   // Load user's personal cloud schedule if exists
@@ -2469,14 +3000,30 @@
                 } else {
                   if (unauthEl) unauthEl.classList.remove('hidden');
                   if (authEl) authEl.classList.add('hidden');
+
+                  if (unauthElHeader) unauthElHeader.classList.remove('hidden');
+                  if (authElHeader) authElHeader.classList.add('hidden');
+
+                  if (unauthElMobile) unauthElMobile.classList.remove('hidden');
+                  if (authElMobile) authElMobile.classList.add('hidden');
                   
                   const syncBText = document.getElementById('syncBadgeText');
                   const syncB = document.getElementById('syncBadge');
+                  const syncBTextHeader = document.getElementById('syncBadgeTextHeader');
+                  const syncBHeader = document.getElementById('syncBadgeHeader');
+
                   if (syncBText) syncBText.textContent = 'Sync Offline';
+                  if (syncBTextHeader) syncBTextHeader.textContent = 'Sync Offline';
+
                   if (syncB) {
                     syncB.style.color = 'var(--text-muted)';
                     const badgeDot = document.querySelector('#syncBadge span');
                     if (badgeDot) badgeDot.style.backgroundColor = 'var(--text-muted)';
+                  }
+                  if (syncBHeader) {
+                    syncBHeader.style.color = 'var(--text-muted)';
+                    const badgeDotHeader = document.querySelector('#syncBadgeHeader span');
+                    if (badgeDotHeader) badgeDotHeader.style.backgroundColor = 'var(--text-muted)';
                   }
 
                   this.state.aiCredits = null;
@@ -2492,16 +3039,35 @@
             // Clean local offline indicators setup
             const unauthEl = document.getElementById('unauthGroup');
             const authEl = document.getElementById('authGroup');
+            const unauthElHeader = document.getElementById('unauthGroupHeader');
+            const authElHeader = document.getElementById('authGroupHeader');
+            const unauthElMobile = document.getElementById('unauthGroupMobile');
+            const authElMobile = document.getElementById('authGroupMobile');
+
             if (unauthEl) unauthEl.classList.remove('hidden');
             if (authEl) authEl.classList.add('hidden');
+            if (unauthElHeader) unauthElHeader.classList.remove('hidden');
+            if (authElHeader) authElHeader.classList.add('hidden');
+            if (unauthElMobile) unauthElMobile.classList.remove('hidden');
+            if (authElMobile) authElMobile.classList.add('hidden');
             
             const syncBText = document.getElementById('syncBadgeText');
             const syncB = document.getElementById('syncBadge');
+            const syncBTextHeader = document.getElementById('syncBadgeTextHeader');
+            const syncBHeader = document.getElementById('syncBadgeHeader');
+
             if (syncBText) syncBText.textContent = 'Local Offline Mode';
+            if (syncBTextHeader) syncBTextHeader.textContent = 'Local Offline Mode';
+
             if (syncB) {
               syncB.style.color = 'var(--text-muted)';
               const badgeDot = document.querySelector('#syncBadge span');
               if (badgeDot) badgeDot.style.backgroundColor = 'var(--text-muted)';
+            }
+            if (syncBHeader) {
+              syncBHeader.style.color = 'var(--text-muted)';
+              const badgeDotHeader = document.querySelector('#syncBadgeHeader span');
+              if (badgeDotHeader) badgeDotHeader.style.backgroundColor = 'var(--text-muted)';
             }
             this.state.aiCredits = null;
             this.updateRemainingCreditsUI();
@@ -3910,14 +4476,20 @@
             const html = document.documentElement;
             const currentTheme = html.getAttribute('data-theme');
             const icon = document.getElementById('themeToggleIcon');
+            const iconHeader = document.getElementById('themeToggleIconHeader');
+
+            const sunIcon = '<path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m11.314 11.314l.707.707M12 8a4 4 0 100 8 4 4 0 000-8z"></path>';
+            const moonIcon = '<path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>';
 
             if (currentTheme === 'dark') {
               html.removeAttribute('data-theme');
-              icon.innerHTML = '<path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>';
+              if (icon) icon.innerHTML = moonIcon;
+              if (iconHeader) iconHeader.innerHTML = moonIcon;
               app.showToast('Light theme active', 'info');
             } else {
               html.setAttribute('data-theme', 'dark');
-              icon.innerHTML = '<path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m11.314 11.314l.707.707M12 8a4 4 0 100 8 4 4 0 000-8z"></path>';
+              if (icon) icon.innerHTML = sunIcon;
+              if (iconHeader) iconHeader.innerHTML = sunIcon;
               app.showToast('Dark theme active', 'info');
             }
           },
@@ -4406,6 +4978,7 @@
               await signOut(auth);
               app.showToast('Successfully signed out.', 'info');
               document.getElementById('userDropdownMenu').classList.add('hidden');
+              document.getElementById('userDropdownMenuHeader').classList.add('hidden');
             } catch (error) {
               console.error('Sign Out Error:', error);
               app.showToast('Sign out failed.', 'error');
@@ -4414,6 +4987,20 @@
 
           toggleUserDropdown() {
             document.getElementById('userDropdownMenu').classList.toggle('hidden');
+          },
+
+          toggleUserDropdownHeader() {
+            document.getElementById('userDropdownMenuHeader').classList.toggle('hidden');
+          },
+
+          toggleMobileMenu() {
+            const drawer = document.getElementById('mobileMenuDrawer');
+            drawer.classList.toggle('hidden');
+          },
+
+          openAuthSignUp() {
+            this.openAuthModal();
+            this.switchAuthTab('signup');
           },
 
           // Real-time Cloud Sync

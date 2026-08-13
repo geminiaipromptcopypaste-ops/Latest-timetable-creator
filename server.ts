@@ -39,11 +39,17 @@ async function startServer() {
 
   // Explicitly serve sitemap.xml and robots.txt at the root level
   anonymityApp.get("/sitemap.xml", (req, res) => {
-    res.sendFile(path.join(process.cwd(), "sitemap.xml"));
+    const filePath = process.env.NODE_ENV === "production" 
+      ? path.join(process.cwd(), "dist", "sitemap.xml")
+      : path.join(process.cwd(), "public", "sitemap.xml");
+    res.sendFile(filePath);
   });
 
   anonymityApp.get("/robots.txt", (req, res) => {
-    res.sendFile(path.join(process.cwd(), "robots.txt"));
+    const filePath = process.env.NODE_ENV === "production" 
+      ? path.join(process.cwd(), "dist", "robots.txt")
+      : path.join(process.cwd(), "public", "robots.txt");
+    res.sendFile(filePath);
   });
 
   // Handle api.php for saving/loading shared timetables

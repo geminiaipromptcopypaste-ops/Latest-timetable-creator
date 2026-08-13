@@ -7,6 +7,8 @@
     <meta name="description" content="Create school routines, study planners, and class schedules easily with our free online timetable generator. High-speed, offline-ready, and AI-powered with custom PDF & PNG exports." />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" />
 
     <!-- Open Graph / social previews -->
     <meta property="og:type" content="website" />
@@ -96,7 +98,6 @@
     </script>
     <style>
       /* --- FONTS & CSS THEME SETUP --- */
-      @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
       :root {
         /* General Layout Controls */
@@ -496,6 +497,7 @@
         table-layout: fixed;
         min-width: max-content;
         position: relative;
+        min-height: 950px;
       }
 
       /* Timetable main table components */
@@ -1112,6 +1114,7 @@
           display: flex !important;
           flex-direction: column !important;
           box-shadow: var(--shadow-md);
+          min-height: 500px !important;
         }
 
         .timetable-wrapper.mobile-single-day .grid-header-row {
@@ -1253,6 +1256,8 @@
         font-family: var(--font-sans);
         color: var(--text-main);
         overflow: hidden;
+        content-visibility: auto;
+        contain-intrinsic-size: auto 1600px;
       }
       .seo-hero {
         text-align: center;
@@ -1441,7 +1446,7 @@
         font-weight: 600;
         font-family: var(--font-sans);
       }
-      .seo-author-info h4 {
+      .seo-author-info h3 {
         font-size: 12px;
         font-weight: 600;
         color: var(--text-main);
@@ -2086,7 +2091,7 @@
             <p>High-Fidelity Scheduler Suite</p>
           </div>
           <!-- Mobile sidebar close button drawer -->
-          <button class="action-btn sidebar-close-btn" onclick="app.handlers.toggleSidebar()" style="margin-left: auto;">
+          <button class="action-btn sidebar-close-btn" onclick="app.handlers.toggleSidebar()" style="margin-left: auto;" aria-label="Close Sidebar">
             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="18" height="18"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
           </button>
         </div>
@@ -2260,20 +2265,20 @@
         <header class="top-bar">
           <!-- Left side widgets -->
           <div class="toolbar-group">
-            <button class="action-btn menu-toggle-btn" onclick="app.handlers.toggleSidebar()" id="btnToggleSidebar" data-tooltip="Toggle Sidebar">
+            <button class="action-btn menu-toggle-btn" onclick="app.handlers.toggleSidebar()" id="btnToggleSidebar" data-tooltip="Toggle Sidebar" aria-label="Toggle Sidebar">
               <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path></svg>
             </button>
-            <button class="action-btn" onclick="app.handlers.undo()" id="btnUndo" data-tooltip="Undo Action (Ctrl+Z)">
+            <button class="action-btn" onclick="app.handlers.undo()" id="btnUndo" data-tooltip="Undo Action (Ctrl+Z)" aria-label="Undo Action">
               <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"></path></svg>
             </button>
-            <button class="action-btn" onclick="app.handlers.redo()" id="btnRedo" data-tooltip="Redo Action (Ctrl+Y)">
+            <button class="action-btn" onclick="app.handlers.redo()" id="btnRedo" data-tooltip="Redo Action (Ctrl+Y)" aria-label="Redo Action">
               <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10H11a8 8 0 00-8 8v2m18-10l-6 6m6-6l-6-6"></path></svg>
             </button>
             <div style="width: 1px; height: 24px; background-color: var(--border-color)"></div>
-            <button class="action-btn" onclick="app.handlers.zoomIn()" data-tooltip="Zoom In">
+            <button class="action-btn" onclick="app.handlers.zoomIn()" data-tooltip="Zoom In" aria-label="Zoom In">
               <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m-3-3h6"></path></svg>
             </button>
-            <button class="action-btn" onclick="app.handlers.zoomOut()" data-tooltip="Zoom Out">
+            <button class="action-btn" onclick="app.handlers.zoomOut()" data-tooltip="Zoom Out" aria-label="Zoom Out">
               <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM7 10h6"></path></svg>
             </button>
           </div>
@@ -2288,27 +2293,27 @@
 
           <!-- Right side tools -->
           <div class="toolbar-group">
-            <button class="action-btn btn-labeled" onclick="app.handlers.printTimetable()" data-tooltip="Save or Print as PDF">
+            <button class="action-btn btn-labeled" onclick="app.handlers.printTimetable()" data-tooltip="Save or Print as PDF" aria-label="Save or Print as PDF">
               <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="16"><path d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
               <span class="btn-label-text">Save PDF</span>
             </button>
-            <button class="action-btn btn-labeled" onclick="app.handlers.exportJson()" data-tooltip="Export Backup JSON">
+            <button class="action-btn btn-labeled" onclick="app.handlers.exportJson()" data-tooltip="Export Backup JSON" aria-label="Export Backup JSON">
               <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="16"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
               <span class="btn-label-text">Save JSON</span>
             </button>
-            <button class="action-btn btn-labeled" onclick="app.handlers.downloadPng()" data-tooltip="Export PNG Image">
+            <button class="action-btn btn-labeled" onclick="app.handlers.downloadPng()" data-tooltip="Export PNG Image" aria-label="Export PNG Image">
               <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="16"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
               <span class="btn-label-text">PNG</span>
             </button>
-            <button class="action-btn btn-labeled" onclick="app.handlers.shareSchedule()" id="btnShareSchedule" data-tooltip="Publish and Share Link">
+            <button class="action-btn btn-labeled" onclick="app.handlers.shareSchedule()" id="btnShareSchedule" data-tooltip="Publish and Share Link" aria-label="Publish and Share Link">
               <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="16"><path d="M8.684 10.742L15.32 7.424M15.32 16.576l-6.637-3.318M21 12a3 3 0 11-6 0 3 3 0 016 0zm-11-6a3 3 0 11-6 0 3 3 0 016 0zm0 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
               <span class="btn-label-text">Share</span>
             </button>
-            <button class="action-btn btn-labeled" onclick="app.handlers.resetSchedule()" id="btnResetSchedule" style="color: #ef4444;" data-tooltip="Reset Timetable">
+            <button class="action-btn btn-labeled" onclick="app.handlers.resetSchedule()" id="btnResetSchedule" style="color: #ef4444;" data-tooltip="Reset Timetable" aria-label="Reset Timetable">
               <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="16"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
               <span class="btn-label-text" style="color: #ef4444;">Reset</span>
             </button>
-            <button class="action-btn" onclick="app.handlers.toggleDark()" data-tooltip="Theme Mode Toggle">
+            <button class="action-btn" onclick="app.handlers.toggleDark()" data-tooltip="Theme Mode Toggle" aria-label="Toggle Dark Theme">
               <svg id="themeToggleIcon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
             </button>
 
@@ -2532,7 +2537,7 @@
                   <div class="seo-testimonial-author">
                     <div class="seo-avatar">AM</div>
                     <div class="seo-author-info">
-                      <h4>Alex M.</h4>
+                      <h3>Alex M.</h3>
                       <p>Sophomore Biology Student</p>
                     </div>
                   </div>
@@ -2544,7 +2549,7 @@
                   <div class="seo-testimonial-author">
                     <div class="seo-avatar">ST</div>
                     <div class="seo-author-info">
-                      <h4>Dr. Sarah T.</h4>
+                      <h3>Dr. Sarah T.</h3>
                       <p>Assistant Principal & Faculty Head</p>
                     </div>
                   </div>
@@ -2556,7 +2561,7 @@
                   <div class="seo-testimonial-author">
                     <div class="seo-avatar">KJ</div>
                     <div class="seo-author-info">
-                      <h4>Kenji J.</h4>
+                      <h3>Kenji J.</h3>
                       <p>Freelance Instructional Designer</p>
                     </div>
                   </div>
@@ -2695,7 +2700,7 @@
       <div class="modal-panel">
         <div class="modal-header">
           <h2 class="modal-title" id="modalTitle">Create Timetable Event</h2>
-          <button class="modal-close" onclick="app.handlers.closeEventModal()">
+          <button class="modal-close" onclick="app.handlers.closeEventModal()" aria-label="Close modal">
             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="18"><path d="M6 18L18 6M6 6l12 12"></path></svg>
           </button>
         </div>
@@ -2797,7 +2802,7 @@
               Sign Up
             </button>
           </div>
-          <button class="modal-close" onclick="app.handlers.closeAuthModal()" style="margin-top: -12px;">
+          <button class="modal-close" onclick="app.handlers.closeAuthModal()" style="margin-top: -12px;" aria-label="Close modal">
             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="18"><path d="M6 18L18 6M6 6l12 12"></path></svg>
           </button>
         </div>
@@ -2849,7 +2854,7 @@
             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="18" class="text-primary-color"><path d="M8.684 10.742L15.32 7.424M15.32 16.576l-6.637-3.318M21 12a3 3 0 11-6 0 3 3 0 016 0zm-11-6a3 3 0 11-6 0 3 3 0 016 0zm0 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
             Share Timetable
           </h2>
-          <button class="modal-close" onclick="app.handlers.closeShareModal()">
+          <button class="modal-close" onclick="app.handlers.closeShareModal()" aria-label="Close modal">
             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="18"><path d="M6 18L18 6M6 6l12 12"></path></svg>
           </button>
         </div>
@@ -2858,7 +2863,7 @@
             Your timetable is successfully published! Anyone with this link can view and import your schedule.
           </p>
           <div class="form-group" style="position: relative; margin-bottom: 16px;">
-            <input type="text" id="shareLinkInput" class="input-ctrl" readonly style="padding-right: 80px; font-size: 12px; background: var(--bg-panel); font-family: var(--font-mono);">
+            <input type="text" id="shareLinkInput" class="input-ctrl" readonly style="padding-right: 80px; font-size: 12px; background: var(--bg-panel); font-family: var(--font-mono);" aria-label="Share Link">
             <button onclick="app.handlers.copyShareLink()" class="btn-ctrl btn-primary" style="position: absolute; right: 4px; top: 4px; bottom: 4px; height: auto; padding: 0 12px; font-size: 11px; width: auto; font-weight: 500;">
               Copy
             </button>
@@ -2879,7 +2884,7 @@
             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="18"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
             Reset Timetable
           </h2>
-          <button class="modal-close" onclick="app.handlers.closeResetConfirmModal()">
+          <button class="modal-close" onclick="app.handlers.closeResetConfirmModal()" aria-label="Close modal">
             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="18"><path d="M6 18L18 6M6 6l12 12"></path></svg>
           </button>
         </div>
@@ -2900,32 +2905,11 @@
 
     <!-- CODE SCRIPT EXECUTOR MODULE -->
     <script type="module">
-      import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js';
-      import { 
-        getAuth, 
-        signInWithPopup, 
-        GoogleAuthProvider, 
-        signInWithEmailAndPassword, 
-        createUserWithEmailAndPassword, 
-        signOut, 
-        onAuthStateChanged 
-      } from 'https://www.gstatic.com/firebasejs/10.14.0/firebase-auth.js';
-      import { 
-        getFirestore, 
-        doc, 
-        setDoc, 
-        getDoc, 
-        updateDoc, 
-        collection, 
-        addDoc, 
-        getDocs, 
-        onSnapshot,
-        serverTimestamp 
-      } from 'https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js';
-
       // Let Firebase services build gracefully and dynamically
       let db = null;
       let auth = null;
+      let getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged;
+      let getFirestore, doc, setDoc, getDoc, updateDoc, collection, addDoc, getDocs, onSnapshot, serverTimestamp;
 
       /**
        * Core Application Architecture State Management
@@ -2973,11 +2957,42 @@
             const configFetch = await fetch('./firebase-applet-config.json');
             if (configFetch.ok) {
               const firebaseConfig = await configFetch.json();
+              
+              // Dynamically import Firebase libraries in background after page is interactive
+              const [
+                { initializeApp },
+                firebaseAuthModule,
+                firebaseFirestoreModule
+              ] = await Promise.all([
+                import('https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js'),
+                import('https://www.gstatic.com/firebasejs/10.14.0/firebase-auth.js'),
+                import('https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js')
+              ]);
+
+              getAuth = firebaseAuthModule.getAuth;
+              signInWithPopup = firebaseAuthModule.signInWithPopup;
+              GoogleAuthProvider = firebaseAuthModule.GoogleAuthProvider;
+              signInWithEmailAndPassword = firebaseAuthModule.signInWithEmailAndPassword;
+              createUserWithEmailAndPassword = firebaseAuthModule.createUserWithEmailAndPassword;
+              signOut = firebaseAuthModule.signOut;
+              onAuthStateChanged = firebaseAuthModule.onAuthStateChanged;
+
+              getFirestore = firebaseFirestoreModule.getFirestore;
+              doc = firebaseFirestoreModule.doc;
+              setDoc = firebaseFirestoreModule.setDoc;
+              getDoc = firebaseFirestoreModule.getDoc;
+              updateDoc = firebaseFirestoreModule.updateDoc;
+              collection = firebaseFirestoreModule.collection;
+              addDoc = firebaseFirestoreModule.addDoc;
+              getDocs = firebaseFirestoreModule.getDocs;
+              onSnapshot = firebaseFirestoreModule.onSnapshot;
+              serverTimestamp = firebaseFirestoreModule.serverTimestamp;
+
               const firebaseApp = initializeApp(firebaseConfig);
               db = getFirestore(firebaseApp, firebaseConfig.firestoreDatabaseId || firebaseConfig.projectId);
               auth = getAuth(firebaseApp);
               
-              console.log('Firebase successfully initialized from local config file.');
+              console.log('Firebase successfully initialized dynamically.');
 
               // Monitor Auth Changes
               onAuthStateChanged(auth, (user) => {

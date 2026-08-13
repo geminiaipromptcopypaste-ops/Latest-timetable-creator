@@ -1491,30 +1491,65 @@
         color: var(--text-muted);
         line-height: 1.5;
       }
+      /* --- UNIVERSAL FOOTER RE-DESIGN --- */
       .seo-footer {
-        padding-top: 30px;
-        margin-top: 40px;
+        padding: 48px 24px 32px 24px;
+        margin-top: 48px;
         border-top: 1px solid var(--border-color);
+        background-color: var(--bg-card);
+        text-align: left;
+        transition: background-color 0.3s, border-color 0.3s;
+      }
+      .footer-container {
+        max-width: 1150px;
+        margin: 0 auto;
+      }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding-bottom: 32px;
+        border-bottom: 1px solid var(--border-color);
+      }
+      @media (min-width: 768px) {
+        .footer-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 64px;
+        }
+      }
+      .footer-col {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .footer-col-title {
+        font-family: 'Outfit', sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--text-main);
+      }
+      .footer-links-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .footer-link-item {
+        font-size: 13.5px;
+        color: var(--text-muted);
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+      .footer-link-item:hover {
+        color: var(--primary-color);
+      }
+      .footer-copyright-row {
+        padding-top: 32px;
         text-align: center;
       }
-      .seo-footer-links {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        flex-wrap: wrap;
-        margin-bottom: 16px;
-      }
-      .seo-footer-link {
+      .footer-copyright-text {
         font-size: 12px;
-        color: var(--primary-color);
-        text-decoration: none;
-        font-weight: 500;
-      }
-      .seo-footer-link:hover {
-        text-decoration: underline;
-      }
-      .seo-footer-copyright {
-        font-size: 11px;
         color: var(--text-muted);
       }
 
@@ -2614,20 +2649,40 @@
 
             <!-- FOOTER WITH INTERNAL LINKS & LEGAL/COPYRIGHT -->
             <footer class="seo-footer">
-              <div class="seo-footer-links">
-                <a href="#timetableApp" class="seo-footer-link" onclick="document.getElementById('gridWorkspace').scrollTo({top: 0, behavior: 'smooth'});">Interactive Grid</a>
-                <a href="#about" class="seo-footer-link">Benefits Overview</a>
-                <a href="#about" class="seo-footer-link">AI Scheduler Copilot</a>
-                <a href="#about" class="seo-footer-link">Privacy & Information Safety</a>
-                <a href="/blog/about-us/" class="seo-footer-link">About Us</a>
-                <a href="/blog/disclaimer/" class="seo-footer-link">Disclaimer</a>
-                <a href="/blog/privacy-policy/" class="seo-footer-link">Privacy Policy</a>
-                <a href="/blog/terms-and-conditions/" class="seo-footer-link">Terms & Conditions</a>
-                <a href="/blog/contact-us/" class="seo-footer-link">Contact Us</a>
+              <div class="footer-container">
+                <div class="footer-grid">
+                  
+                  <!-- Column 1: Company -->
+                  <div class="footer-col">
+                    <h3 class="footer-col-title">Company</h3>
+                    <div class="footer-links-list">
+                      <a href="/blog/about-us/" class="footer-link-item">About Us</a>
+                      <a href="/blog/contact-us/" class="footer-link-item">Contact Us</a>
+                      <a href="/blog/pricing/" class="footer-link-item">Pricing Tier</a>
+                      <a href="/blog/" class="footer-link-item font-semibold" style="font-weight: 600; color: var(--primary-color);">Blog (Articles Archive)</a>
+                    </div>
+                  </div>
+
+                  <!-- Column 2: Legal Terms -->
+                  <div class="footer-col">
+                    <h3 class="footer-col-title">Legal Terms</h3>
+                    <div class="footer-links-list">
+                      <a href="/blog/privacy-policy/" class="footer-link-item">Privacy Policy</a>
+                      <a href="/blog/terms-and-conditions/" class="footer-link-item">Terms of Service</a>
+                      <a href="/blog/refund-policy/" class="footer-link-item">Refund Policy</a>
+                      <a href="/blog/disclaimer/" class="footer-link-item">Disclaimer Notice</a>
+                    </div>
+                  </div>
+
+                </div>
+
+                <!-- Bottom Copyright Row -->
+                <div class="footer-copyright-row">
+                  <p class="footer-copyright-text">
+                    &copy; 2026 Online Timetable Creator. All rights reserved. Built for professional academic planning.
+                  </p>
+                </div>
               </div>
-              <p class="seo-footer-copyright">
-                &copy; 2026 Online Timetable Creator. All rights reserved. Built for professional academic planning.
-              </p>
             </footer>
 
           </div>

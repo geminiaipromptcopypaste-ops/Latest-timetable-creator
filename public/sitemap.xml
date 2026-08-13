@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Core Main App -->
   <url>
     <loc>https://timetablecreator.online</loc>
     <lastmod>2026-08-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+
+  <!-- Blog & Archive Center -->
   <url>
-    <loc>https://timetablecreator.online/blog/terms-and-conditions/</loc>
+    <loc>https://timetablecreator.online/blog/</loc>
     <lastmod>2026-08-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
+
+  <!-- Core Utility Pages -->
   <url>
     <loc>https://timetablecreator.online/blog/about-us/</loc>
     <lastmod>2026-08-13</lastmod>
@@ -19,7 +24,7 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://timetablecreator.online/blog/disclaimer/</loc>
+    <loc>https://timetablecreator.online/blog/contact-us/</loc>
     <lastmod>2026-08-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -31,9 +36,53 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://timetablecreator.online/blog/contact-us/</loc>
+    <loc>https://timetablecreator.online/blog/terms-and-conditions/</loc>
     <lastmod>2026-08-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://timetablecreator.online/blog/refund-policy/</loc>
+    <lastmod>2026-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://timetablecreator.online/blog/disclaimer/</loc>
+    <lastmod>2026-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Expert Blog Articles -->
+  <url>
+    <loc>https://timetablecreator.online/blog/study-timetable-for-class-10/</loc>
+    <lastmod>2026-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://timetablecreator.online/blog/daily-routine-for-class-10-student-at-home/</loc>
+    <lastmod>2026-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://timetablecreator.online/blog/how-does-an-automatic-timetable-creator-work/</loc>
+    <lastmod>2026-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://timetablecreator.online/blog/how-to-make-a-perfect-school-timetable-in-2026-step-by-step-guide-for-students-parents-teachers/</loc>
+    <lastmod>2026-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://timetablecreator.online/blog/timetable-guides/</loc>
+    <lastmod>2026-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>

@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How Does an Automatic Timetable Creator Work? - Scheduling Algorithms</title>
+    <meta name="description" content="Discover the mechanics behind automatic timetable generation. Explore constraint satisfaction, backtracking, and heuristics that power modern scheduling engines." />
+    <link rel="canonical" href="https://timetablecreator.online/blog/how-does-an-automatic-timetable-creator-work/" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght=300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght=300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              violet: {
+                50: '#f5f3ff',
+                100: '#ede9fe',
+                200: '#ddd6fe',
+                500: '#8b5cf6',
+                600: '#7c3aed',
+                700: '#6d28d9',
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+      }
+      h1, h2, h3, h4 {
+        font-family: 'Outfit', sans-serif;
+      }
+      /* Dark Theme styling mimics main app */
+      [data-theme="dark"] {
+        background-color: #000000 !important;
+        color: #ffffff !important;
+      }
+      [data-theme="dark"] .bg-white {
+        background-color: #000000 !important;
+        border-color: #2e1065 !important;
+      }
+      [data-theme="dark"] .text-slate-900 {
+        color: #ffffff !important;
+      }
+      [data-theme="dark"] .text-slate-600 {
+        color: #9ca3af !important;
+      }
+      [data-theme="dark"] .text-slate-500 {
+        color: #9ca3af !important;
+      }
+      [data-theme="dark"] .bg-slate-50 {
+        background-color: #0b0b0f !important;
+      }
+      [data-theme="dark"] .border-slate-100 {
+        border-color: #2e1065 !important;
+      }
+      [data-theme="dark"] .border-slate-200 {
+        border-color: #2e1065 !important;
+      }
+      [data-theme="dark"] .bg-[#fafafa] {
+        background-color: #000000 !important;
+      }
+      [data-theme="dark"] header, [data-theme="dark"] footer {
+        background-color: #000000 !important;
+        border-color: #2e1065 !important;
+      }
+      [data-theme="dark"] .nav-link-header {
+        color: #9ca3af;
+      }
+      [data-theme="dark"] .nav-link-header:hover {
+        color: #a78bfa;
+        background-color: rgba(167, 139, 250, 0.1);
+      }
+    </style>
+    
+    <!-- JSON-LD Article Schema for Google Rich Snippets (E-E-A-T Compliance) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "How Does an Automatic Timetable Creator Work? - Scheduling Algorithms",
+      "description": "An inside look into the algorithms and logical constraints that power modern class generators and automatic timetable tools. Learn about hard constraints, soft goals, and backtracking.",
+      "image": "https://timetablecreator.online/logo.png",
+      "author": {
+        "@type": "Person",
+        "name": "Prof. Sarah Lin",
+        "jobTitle": "Senior Academic Planner & Educational Technologist",
+        "knowsAbout": ["Educational Administration", "Class Scheduling", "Cognitive Ergonomics"]
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Online Timetable Creator",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://timetablecreator.online/logo.png"
+        }
+      },
+      "datePublished": "2026-08-13",
+      "mainEntityOfPage": "https://timetablecreator.online/blog/how-does-an-automatic-timetable-creator-work/"
+    }
+    </script>
+  </head>
+  <body class="bg-[#fafafa] text-[#1f2937] leading-relaxed antialiased selection:bg-violet-100 selection:text-violet-900 min-h-screen flex flex-col justify-between transition-colors duration-200">
+    
+    <!-- UNIVERSAL TOP HEADER -->
+    <header class="border-b border-violet-100 bg-white sticky top-0 z-50 transition-colors duration-200">
+      <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+        <!-- Logo & Brand -->
+        <a href="/" class="flex items-center gap-3 group">
+          <img src="/logo.png" alt="Timetable Creator Logo" class="w-9 h-9 rounded-xl border border-violet-100 shadow-sm transition-transform group-hover:scale-105" referrerpolicy="no-referrer">
+          <div class="flex flex-col">
+            <span class="font-bold text-base text-slate-800 tracking-tight group-hover:text-violet-600 transition-colors">Timetable Creator</span>
+            <span class="text-[10px] text-slate-400 font-medium tracking-wide">Online Class Scheduler</span>
+          </div>
+        </a>
+
+        <!-- Menu links (Desktop) -->
+        <nav class="hidden md:flex items-center gap-1.5">
+          <a href="/" class="text-xs font-semibold text-slate-500 hover:text-violet-600 hover:bg-violet-50/50 px-3 py-2 rounded-lg transition-all">Workspace</a>
+          <a href="/blog/about-us/" class="text-xs font-semibold text-slate-500 hover:text-violet-600 hover:bg-violet-50/50 px-3 py-2 rounded-lg transition-all">About Us</a>
+          <a href="/blog/contact-us/" class="text-xs font-semibold text-slate-500 hover:text-violet-600 hover:bg-violet-50/50 px-3 py-2 rounded-lg transition-all">Contact Us</a>
+          <a href="/blog/privacy-policy/" class="text-xs font-semibold text-slate-500 hover:text-violet-600 hover:bg-violet-50/50 px-3 py-2 rounded-lg transition-all">Privacy Policy</a>
+        </nav>
+
+        <!-- Right Side Actions (Desktop) -->
+        <div class="hidden md:flex items-center gap-3">
+          <button class="w-8 h-8 rounded-lg border border-slate-200 flex items-center justify-center text-slate-500 hover:border-violet-600 hover:text-violet-600 transition-colors" onclick="toggleLocalTheme()" title="Toggle Dark/Light Mode">
+            <svg id="themeIconLocal" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="w-4 h-4">
+              <path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+            </svg>
+          </button>
+          <a href="/?auth=signin" class="text-xs font-bold text-slate-700 hover:text-violet-600 transition-colors">Sign In</a>
+          <a href="/?auth=signup" class="text-xs font-bold bg-violet-600 text-white px-4 py-2 rounded-xl hover:bg-violet-700 shadow-sm hover:shadow transition-all">Sign Up</a>
+        </div>
+
+        <!-- Mobile Hamburg Button -->
+        <button class="md:hidden w-9 h-9 rounded-lg border border-slate-200 flex items-center justify-center text-slate-600 hover:text-violet-600" onclick="toggleMobileMenuLocal()">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Dropdown Drawer -->
+      <div id="mobileMenuLocal" class="hidden border-t border-slate-100 bg-white py-4 px-6 md:hidden flex flex-col gap-3">
+        <a href="/" class="text-xs font-semibold text-slate-600 py-1 hover:text-violet-600">Workspace</a>
+        <a href="/blog/about-us/" class="text-xs font-semibold text-slate-600 py-1 hover:text-violet-600">About Us</a>
+        <a href="/blog/contact-us/" class="text-xs font-semibold text-slate-600 py-1 hover:text-violet-600">Contact Us</a>
+        <a href="/blog/privacy-policy/" class="text-xs font-semibold text-slate-600 py-1 hover:text-violet-600">Privacy Policy</a>
+        <div class="h-px bg-slate-100 my-1"></div>
+        <button class="flex items-center gap-2 text-xs font-semibold text-slate-600 py-1 hover:text-violet-600" onclick="toggleLocalTheme()">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="w-4 h-4">
+            <path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+          </svg>
+          Toggle Dark Mode
+        </button>
+        <div class="flex gap-2 mt-2">
+          <a href="/?auth=signin" class="flex-1 text-center text-xs font-bold text-slate-700 border border-slate-200 py-2 rounded-xl">Sign In</a>
+          <a href="/?auth=signup" class="flex-1 text-center text-xs font-bold bg-violet-600 text-white py-2 rounded-xl">Sign Up</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="max-w-4xl mx-auto px-6 py-12 flex-grow">
+      <article class="bg-white border border-[#e5e7eb] rounded-3xl p-8 md:p-12 shadow-sm space-y-8">
+        
+        <!-- Breadcrumb navigation -->
+        <nav class="flex items-center gap-2 text-xs text-slate-400 font-medium">
+          <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
+          <span>/</span>
+          <a href="/blog/" class="hover:text-violet-600 transition-colors">Blog</a>
+          <span>/</span>
+          <span class="text-slate-600 font-semibold">How Automatic Creators Work</span>
+        </nav>
+
+        <!-- Article Banner -->
+        <header class="border-b border-[#e5e7eb] pb-8">
+          <div class="flex items-center gap-2 mb-4">
+            <span class="text-xs font-bold bg-violet-100 text-violet-700 px-3 py-1 rounded-full uppercase tracking-wider">EdTech Science</span>
+            <span class="text-xs text-slate-400 font-medium">11 Min Read</span>
+          </div>
+          <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight mb-4">
+            How Does an Automatic Timetable Creator Work? Behind the Scenes
+          </h1>
+          <p class="text-lg text-slate-500 font-normal leading-relaxed mb-6">
+            An exploration of Constraint Satisfaction Problems, genetic algorithms, and heuristics that make automated academic scheduling possible.
+          </p>
+
+          <!-- E-E-A-T Author Card -->
+          <div class="flex items-center gap-4 bg-slate-50/50 border border-slate-100 rounded-2xl p-4">
+            <div class="w-12 h-12 rounded-full bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-lg shrink-0">
+              SL
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="text-sm font-bold text-slate-900">Prof. Sarah Lin</span>
+                <span class="text-[10px] bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded-full uppercase">Reviewed Specialist</span>
+              </div>
+              <p class="text-xs text-slate-500 leading-normal">
+                M.A. in Curriculum Design, Educational Technologist. Research focus on computer-assisted scheduling algorithms and classroom resource optimization.
+              </p>
+            </div>
+          </div>
+        </header>
+
+        <!-- Dynamic Table of Contents -->
+        <div class="bg-violet-50/30 border border-violet-100/50 rounded-2xl p-6">
+          <h2 class="text-base font-bold text-slate-900 mb-3">Table of Contents</h2>
+          <ul class="space-y-2 text-sm text-slate-600 font-medium">
+            <li><a href="#np-hard-problem" class="text-violet-600 hover:underline">1. The NP-Hard Nature of School Scheduling</a></li>
+            <li><a href="#hard-vs-soft" class="text-violet-600 hover:underline">2. The Core Parameters: Hard vs. Soft Constraints</a></li>
+            <li><a href="#algorithm-engines" class="text-violet-600 hover:underline">3. Algorithmic Engines powering Generators</a></li>
+            <li><a href="#backtracking-flow" class="text-violet-600 hover:underline">4. Backtracking and Search Space Heuristics</a></li>
+            <li><a href="#comparison-table" class="text-violet-600 hover:underline">5. Comparing Manual vs. Automatic Creation</a></li>
+            <li><a href="#creator-cta" class="text-violet-600 hover:underline">6. Build Your Auto-Timetable Instantly</a></li>
+          </ul>
+        </div>
+
+        <!-- Section 1 -->
+        <section id="np-hard-problem" class="space-y-4">
+          <h2 class="text-2xl font-bold text-slate-900">1. The NP-Hard Nature of School Scheduling</h2>
+          <p>
+            To the casual observer, building a school timetable looks like a simple game of Tetris. You have a pool of classes, a set of rooms, and a list of teachers—you simply slide them into empty slots. 
+          </p>
+          <p>
+            However, mathematically, timetabling is classified as an <strong>NP-hard (Nondeterministic Polynomial-time hard)</strong> combinatorial optimization problem. As you add more parameters (e.g. 10 teachers, 5 subjects, and 8 rooms), the number of potential schedule combinations grows exponentially. Generating a conflict-free solution manually is nearly impossible because checking every combination would take a human thousands of hours.
+          </p>
+        </section>
+
+        <!-- Section 2 -->
+        <section id="hard-vs-soft" class="space-y-4">
+          <h2 class="text-2xl font-bold text-slate-900">2. The Core Parameters: Hard vs. Soft Constraints</h2>
+          <p>
+            Automatic timetable generators operate by evaluating and optimizing constraints. Every program splits parameters into two categories:
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 py-2">
+            <div class="border border-slate-100 bg-slate-50 rounded-xl p-4 space-y-2">
+              <h3 class="font-bold text-slate-900 text-sm">Hard Constraints (Non-Negotiable)</h3>
+              <p class="text-xs text-slate-500 leading-relaxed">Must be 100% satisfied. For example: A teacher cannot teach two different classes at the same time, and a physical classroom cannot host both biology and physics labs simultaneously.</p>
+            </div>
+            <div class="border border-slate-100 bg-slate-50 rounded-xl p-4 space-y-2">
+              <h3 class="font-bold text-slate-900 text-sm">Soft Constraints (Preferential)</h3>
+              <p class="text-xs text-slate-500 leading-relaxed">Desired but negotiable. For example: Teachers prefer morning blocks, students shouldn't have more than 2 consecutive exam blocks, and physical education should ideally take place outdoors on sunny days.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 3 -->
+        <section id="algorithm-engines" class="space-y-4">
+          <h2 class="text-2xl font-bold text-slate-900">3. Algorithmic Engines powering Generators</h2>
+          <p>
+            Modern, high-performance automatic generators rely on complex computer science structures to navigate the search space:
+          </p>
+          <ul class="list-disc pl-6 space-y-2 text-slate-600">
+            <li><strong>Genetic Algorithms (GA):</strong> Simulates natural selection. The system generates 100 random schedules, ranks their "fitness score", keeps the top performers, and "crosses them over" (merges parameters) with tiny mutations to find the ultimate roster.</li>
+            <li><strong>Constraint Satisfaction Engines:</strong> Uses logical deduction rules to narrow down variables before running checks.</li>
+            <li><strong>Simulated Annealing:</strong> Mimics metallurgical cooling. It accepts bad schedule choices early on to explore wider options, then gradually locks into a highly optimized solution as it runs.</li>
+          </ul>
+        </section>
+
+        <!-- Section 4 -->
+        <section id="backtracking-flow" class="space-y-4">
+          <h2 class="text-2xl font-bold text-slate-900">4. Backtracking and Search Space Heuristics</h2>
+          <p>
+            The most common method used by lightweight web-based creators is <strong>Recursive Backtracking</strong>.
+          </p>
+          <p>
+            The algorithm places classes one by one. If it reaches slot 12 and realizes Teacher B is double-booked, instead of failing entirely, it "backtracks" (steps back to slot 11), swaps that class, and tries a different branch. This smart trial-and-error occurs thousands of times in milliseconds.
+          </p>
+        </section>
+
+        <!-- Section 5 -->
+        <section id="comparison-table" class="space-y-4">
+          <h2 class="text-2xl font-bold text-slate-900">5. Comparing Manual vs. Automatic Creation</h2>
+          <p>
+            Here is a breakdown of how automated platforms save time and eliminate human error:
+          </p>
+
+          <div class="border border-[#e5e7eb] rounded-2xl overflow-hidden mt-4">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse text-xs md:text-sm min-w-[600px]">
+                <thead>
+                  <tr class="bg-slate-50 border-b border-[#e5e7eb]">
+                    <th class="p-4 font-bold text-slate-900 w-1/4">Feature Parameter</th>
+                    <th class="p-4 font-bold text-slate-900 w-1/3">Manual Pen-and-Paper/Excel</th>
+                    <th class="p-4 font-bold text-slate-900">Automatic Timetable Creator</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 text-slate-600">
+                  <tr class="hover:bg-slate-50/50">
+                    <td class="p-4 font-semibold">Creation Speed</td>
+                    <td class="p-4">Several hours or days of planning.</td>
+                    <td class="p-4 text-violet-600 font-bold">1-2 minutes under smart constraints.</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50/50">
+                    <td class="p-4 font-semibold">Conflict Prevention</td>
+                    <td class="p-4">High risk of missed double-bookings.</td>
+                    <td class="p-4">Strictly impossible due to hard constraint checks.</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50/50">
+                    <td class="p-4 font-semibold">Export & Sharing</td>
+                    <td class="p-4">Messy print-outs or static PDF screenshots.</td>
+                    <td class="p-4">HD PDF, high-res PNG, or shareable link instantly.</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50/50">
+                    <td class="p-4 font-semibold">Rescheduling Flexibility</td>
+                    <td class="p-4">Complete overhaul required for small teacher shifts.</td>
+                    <td class="p-4">Instant shift and update across the entire grid.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 6 -->
+        <section id="creator-cta" class="space-y-4 border-t border-[#e5e7eb] pt-8">
+          <h2 class="text-2xl font-bold text-slate-900">6. Build Your Auto-Timetable Instantly</h2>
+          <p>
+            Stop wasting hours struggling with complex scheduling grids or Excel sheets. Our platform provides a modern, fast scheduling workspace.
+          </p>
+          <div class="bg-violet-50/50 border border-violet-100 rounded-2xl p-6 flex flex-col md:flex-row gap-6 items-center">
+            <div class="space-y-3 flex-1">
+              <h3 class="font-bold text-slate-900">Ready to put these algorithms to work?</h3>
+              <p class="text-sm text-slate-600 leading-relaxed">
+                Our workspace allows you to effortlessly design balanced, conflict-free weekly timetables, toggle gorgeous light/dark modes, and download high-resolution formats instantly.
+              </p>
+              <div class="pt-2">
+                <a href="/" class="inline-flex items-center gap-2 bg-violet-600 text-white text-xs font-bold px-5 py-3 rounded-xl hover:bg-violet-700 shadow-sm transition-all">
+                  Go to Timetable Workspace
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </a>
+              </div>
+            </div>
+            <div class="w-24 h-24 shrink-0 bg-violet-100 rounded-3xl flex items-center justify-center text-violet-600 shadow-inner">
+              <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" class="w-12 h-12">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25"></path>
+              </svg>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </main>
+
+    <!-- UNIVERSAL FOOTER MATCHING DESIGN IMAGE -->
+    <footer class="border-t border-violet-100 bg-white pt-12 pb-8 transition-colors duration-200">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 pb-8 border-b border-slate-100">
+          
+          <!-- Column 1: Company -->
+          <div class="space-y-4">
+            <h3 class="text-xs font-bold text-slate-900 uppercase tracking-widest">Company</h3>
+            <div class="flex flex-col gap-2.5">
+              <a href="/blog/about-us/" class="text-sm text-slate-500 hover:text-violet-600 transition-colors">About Us</a>
+              <a href="/blog/contact-us/" class="text-sm text-slate-500 hover:text-violet-600 transition-colors">Contact Us</a>
+              <a href="/blog/" class="text-sm text-slate-500 hover:text-violet-600 transition-colors font-semibold">Blog (Articles Archive)</a>
+            </div>
+          </div>
+
+          <!-- Column 2: Legal Terms -->
+          <div class="space-y-4">
+            <h3 class="text-xs font-bold text-slate-900 uppercase tracking-widest">Legal Terms</h3>
+            <div class="flex flex-col gap-2.5">
+              <a href="/blog/privacy-policy/" class="text-sm text-slate-500 hover:text-violet-600 transition-colors">Privacy Policy</a>
+              <a href="/blog/terms-and-conditions/" class="text-sm text-slate-500 hover:text-violet-600 transition-colors">Terms of Service</a>
+              <a href="/blog/refund-policy/" class="text-sm text-slate-500 hover:text-violet-600 transition-colors">Refund Policy</a>
+              <a href="/blog/disclaimer/" class="text-sm text-slate-500 hover:text-violet-600 transition-colors">Disclaimer Notice</a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Bottom Copyright Row -->
+        <div class="pt-8 text-center">
+          <p class="text-xs text-slate-400">
+            &copy; 2026 Online Timetable Creator. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- LIGHT/DARK MODE SCRIPT FOR STATIC BLOG PAGE -->
+    <script>
+      // Load current theme from localStorage
+      const savedTheme = localStorage.getItem('timetable_theme') || '';
+      if (savedTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        updateLocalThemeIcon('dark');
+      }
+
+      function toggleLocalTheme() {
+        const html = document.documentElement;
+        const currentTheme = html.getAttribute('data-theme');
+        if (currentTheme === 'dark') {
+          html.removeAttribute('data-theme');
+          localStorage.setItem('timetable_theme', 'light');
+          updateLocalThemeIcon('light');
+        } else {
+          html.setAttribute('data-theme', 'dark');
+          localStorage.setItem('timetable_theme', 'dark');
+          updateLocalThemeIcon('dark');
+        }
+      }
+
+      function updateLocalThemeIcon(theme) {
+        const iconSvg = document.getElementById('themeIconLocal');
+        if (!iconSvg) return;
+        if (theme === 'dark') {
+          iconSvg.innerHTML = '<path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m11.314 11.314l.707.707M12 8a4 4 0 100 8 4 4 0 000-8z"></path>';
+        } else {
+          iconSvg.innerHTML = '<path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>';
+        }
+      }
+
+      function toggleMobileMenuLocal() {
+        const menu = document.getElementById('mobileMenuLocal');
+        if (menu) {
+          menu.classList.toggle('hidden');
+        }
+      }
+    </script>
+  </body>
+</html>

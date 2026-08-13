@@ -413,15 +413,32 @@
       // Triggers custom Google Translate cookie state and updates parameters
       function changeLanguage(langCode) {
         const domain = window.location.hostname;
-        document.cookie = `googtrans=/en/${langCode}; path=/; domain=${domain}`;
-        document.cookie = `googtrans=/en/${langCode}; path=/; domain=.timetablecreator.online`;
-        document.cookie = `googtrans=/en/${langCode}; path=/`; // Local fallback
+        
+        // Clear existing cookies with different parameters to prevent duplicates
+        document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; SameSite=None; Secure";
+        if (domain) {
+          document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" + domain + "; SameSite=None; Secure";
+        }
+
+        // Set cookies with SameSite=None and Secure for modern browser iframe compatibility
+        document.cookie = `googtrans=/en/${langCode}; path=/; SameSite=None; Secure`;
+        if (domain) {
+          document.cookie = `googtrans=/en/${langCode}; path=/; domain=${domain}; SameSite=None; Secure`;
+          const parts = domain.split('.');
+          if (parts.length >= 2) {
+            const baseDomain = parts.slice(-2).join('.');
+            document.cookie = `googtrans=/en/${langCode}; path=/; domain=.${baseDomain}; SameSite=None; Secure`;
+          }
+        }
         
         const url = new URL(window.location.href);
         if (langCode === 'en') {
           url.searchParams.delete('lang');
+          url.hash = '';
         } else {
           url.searchParams.set('lang', langCode);
+          url.hash = `#googtrans(en|${langCode})`;
         }
         window.location.href = url.toString();
       }
@@ -439,7 +456,19 @@
       const urlParams = new URLSearchParams(window.location.search);
       const queryLang = urlParams.get('lang');
       if (queryLang) {
-        document.cookie = `googtrans=/en/${queryLang}; path=/`;
+        document.cookie = `googtrans=/en/${queryLang}; path=/; SameSite=None; Secure`;
+        const domain = window.location.hostname;
+        if (domain) {
+          document.cookie = `googtrans=/en/${queryLang}; path=/; domain=${domain}; SameSite=None; Secure`;
+          const parts = domain.split('.');
+          if (parts.length >= 2) {
+            const baseDomain = parts.slice(-2).join('.');
+            document.cookie = `googtrans=/en/${queryLang}; path=/; domain=.${baseDomain}; SameSite=None; Secure`;
+          }
+        }
+        if (!window.location.hash.includes('googtrans')) {
+          window.location.hash = `#googtrans(en|${queryLang})`;
+        }
       }
 
       // Dynamic script injector for Google Translate

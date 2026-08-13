@@ -1,0 +1,6 @@
+{
+  "name": "Timetable Creator",
+  "description": "A high-fidelity, production-grade Timetable Creator with drag-and-drop, customizations, and export capabilities, structured in a fully offline self-contained design.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

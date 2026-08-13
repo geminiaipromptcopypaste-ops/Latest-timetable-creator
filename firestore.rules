@@ -1,0 +1,87 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Global default-deny safety net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions for validating requests
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(resourceData) {
+      return isSignedIn() && resourceData.ownerId == request.auth.uid;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // Main validation schema for a Schedule document
+    function isValidSchedule(data) {
+      return data.keys().hasAll(['ownerId', 'config', 'events', 'createdAt', 'updatedAt']) 
+        && data.ownerId is string
+        && data.ownerId.size() > 0
+        && data.config is map
+        && data.events is list
+        && data.createdAt is timestamp
+        && data.updatedAt is timestamp;
+    }
+
+    // Main validation schema for a User Profile document
+    function isValidUser(data) {
+      return data.keys().hasAll(['ownerId', 'ownerEmail', 'aiCredits', 'createdAt', 'updatedAt'])
+        && data.ownerId is string
+        && data.ownerId.size() > 0
+        && data.ownerEmail is string
+        && (data.aiCredits is int || data.aiCredits is float)
+        && data.createdAt is timestamp
+        && data.updatedAt is timestamp;
+    }
+
+    // Rules for User profiles collection
+    match /users/{userId} {
+      allow read: if isSignedIn() && userId == request.auth.uid;
+
+      allow create: if isSignedIn()
+        && userId == request.auth.uid
+        && isValidUser(request.resource.data)
+        && request.resource.data.ownerId == request.auth.uid
+        && request.resource.data.aiCredits == 2;
+
+      allow update: if isSignedIn()
+        && userId == request.auth.uid
+        && isValidUser(request.resource.data)
+        && request.resource.data.ownerId == resource.data.ownerId
+        && request.resource.data.aiCredits <= resource.data.aiCredits
+        && request.resource.data.aiCredits >= 0;
+    }
+
+    // Rules for Schedules collection group
+    match /schedules/{scheduleId} {
+      allow get: if isValidId(scheduleId);
+      
+      // To allow users to query their own schedules, list operations are permitted if they filter by their own UID
+      allow list: if isSignedIn() && resource.data.ownerId == request.auth.uid;
+
+      allow create: if isSignedIn() 
+        && isValidId(scheduleId)
+        && isValidSchedule(request.resource.data)
+        && request.resource.data.ownerId == request.auth.uid;
+
+      allow update: if isSignedIn()
+        && isValidId(scheduleId)
+        && isValidSchedule(request.resource.data)
+        && isOwner(resource.data)
+        && request.resource.data.ownerId == resource.data.ownerId
+        && request.resource.data.createdAt == resource.data.createdAt;
+
+      allow delete: if isSignedIn()
+        && isValidId(scheduleId)
+        && isOwner(resource.data);
+    }
+  }
+}

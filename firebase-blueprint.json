@@ -1,0 +1,48 @@
+{
+  "entities": {
+    "schedule": {
+      "title": "Timetable Schedule",
+      "description": "Represents a published or saved weekly timetable schedule containing all events and grid settings.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "description": "Display name of the schedule" },
+        "ownerId": { "type": "string", "description": "The UID of the user who owns this schedule" },
+        "ownerEmail": { "type": "string", "description": "The email of the schedule owner" },
+        "config": {
+          "type": "object",
+          "description": "Grid display and sizing configuration parameters"
+        },
+        "events": {
+          "type": "array",
+          "description": "A list of course/activity events currently pinned in this timetable"
+        },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["ownerId", "config", "events", "createdAt", "updatedAt"]
+    },
+    "user": {
+      "title": "User Profile",
+      "description": "Stores profile and utility usage limits such as AI Intelligent Scheduler credits.",
+      "type": "object",
+      "properties": {
+        "ownerId": { "type": "string", "description": "The UID of the user" },
+        "ownerEmail": { "type": "string", "description": "The email address of the user" },
+        "aiCredits": { "type": "integer", "description": "Number of remaining AI scheduler credits" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["ownerId", "ownerEmail", "aiCredits", "createdAt", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/schedules/{scheduleId}": {
+      "schema": "schedule",
+      "description": "Stores shared timetables published by users, searchable by the unique schedule ID."
+    },
+    "/users/{userId}": {
+      "schema": "user",
+      "description": "User profile metadata tracking AI credits."
+    }
+  }
+}

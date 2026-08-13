@@ -6,6 +6,14 @@
     <title>About Us - Online Timetable Creator</title>
     <meta name="description" content="Discover the team, mission, and technology behind the Online Timetable Creator." />
     <link rel="canonical" href="https://timetablecreator.online/blog/about-us/" />
+    <link rel="alternate" hreflang="x-default" href="https://timetablecreator.online/blog/about-us/" />
+    <link rel="alternate" hreflang="en" href="https://timetablecreator.online/blog/about-us/" />
+    <link rel="alternate" hreflang="es" href="https://timetablecreator.online/blog/about-us/?lang=es" />
+    <link rel="alternate" hreflang="fr" href="https://timetablecreator.online/blog/about-us/?lang=fr" />
+    <link rel="alternate" hreflang="de" href="https://timetablecreator.online/blog/about-us/?lang=de" />
+    <link rel="alternate" hreflang="ru" href="https://timetablecreator.online/blog/about-us/?lang=ru" />
+    <link rel="alternate" hreflang="ar" href="https://timetablecreator.online/blog/about-us/?lang=ar" />
+    <link rel="alternate" hreflang="hi" href="https://timetablecreator.online/blog/about-us/?lang=hi" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -76,6 +84,63 @@
         color: #a78bfa;
         background-color: rgba(167, 139, 250, 0.1);
       }
+      /* Google Translate Custom Styles */
+      .lang-dropdown-container {
+        position: relative;
+        display: inline-block;
+      }
+      .lang-dropdown-menu {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: calc(100% + 8px);
+        background: #ffffff;
+        border: 1px solid #ede9fe;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+        min-width: 130px;
+        z-index: 1100;
+        overflow: hidden;
+        padding: 4px;
+      }
+      [data-theme="dark"] .lang-dropdown-menu {
+        background: #000000;
+        border-color: #2e1065;
+      }
+      .lang-dropdown-menu.show {
+        display: block;
+      }
+      .lang-dropdown-item {
+        display: block;
+        width: 100%;
+        padding: 8px 12px;
+        font-size: 13px;
+        font-weight: 500;
+        color: #1f2937;
+        border-radius: 8px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        text-align: left;
+        transition: all 0.15s ease;
+      }
+      [data-theme="dark"] .lang-dropdown-item {
+        color: #ffffff;
+      }
+      .lang-dropdown-item:hover {
+        background: #ede9fe;
+        color: #7c3aed;
+      }
+      [data-theme="dark"] .lang-dropdown-item:hover {
+        background: #0b0b0f;
+        color: #a78bfa;
+      }
+      .goog-te-banner-frame, .goog-te-banner, .skiptranslate, #google_translate_element, .goog-tooltip {
+        display: none !important;
+      }
+      body {
+        top: 0px !important;
+      }
     </style>
   </head>
   <body class="bg-[#fafafa] text-[#1f2937] leading-relaxed antialiased selection:bg-violet-100 selection:text-violet-900 min-h-screen flex flex-col justify-between transition-colors duration-200">
@@ -107,6 +172,23 @@
               <path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
             </svg>
           </button>
+
+          <!-- Google Translate Dropdown Selector -->
+          <div class="lang-dropdown-container">
+            <button class="w-8 h-8 rounded-lg border border-slate-200 flex items-center justify-center text-slate-500 hover:border-violet-600 hover:text-violet-600 transition-colors" onclick="toggleLangDropdown()" id="btnLangDropdown" title="Change Language" aria-label="Change Language">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 0c-.818-2.251-2.253-4.247-4-5.5C6.754 4.753 5.32 6.749 4.5 9h8m-8 0a13.935 13.935 0 002.912 4.5M6.412 9a13.935 13.935 0 002.912 4.5M11 21l3-6 3 6m-5-2h4"></path></svg>
+            </button>
+            <div class="lang-dropdown-menu" id="langDropdownMenu">
+              <button class="lang-dropdown-item" onclick="changeLanguage('en')">English</button>
+              <button class="lang-dropdown-item" onclick="changeLanguage('es')">Español</button>
+              <button class="lang-dropdown-item" onclick="changeLanguage('fr')">Français</button>
+              <button class="lang-dropdown-item" onclick="changeLanguage('de')">Deutsch</button>
+              <button class="lang-dropdown-item" onclick="changeLanguage('ru')">Русский</button>
+              <button class="lang-dropdown-item" onclick="changeLanguage('ar')">العربية</button>
+              <button class="lang-dropdown-item" onclick="changeLanguage('hi')">हिन्दी (Hindi)</button>
+            </div>
+          </div>
+
           <a href="/?auth=signin" class="text-xs font-bold text-slate-700 hover:text-violet-600 transition-colors">Sign In</a>
           <a href="/?auth=signup" class="text-xs font-bold bg-violet-600 text-white px-4 py-2 rounded-xl hover:bg-violet-700 shadow-sm hover:shadow transition-all">Sign Up</a>
         </div>
@@ -308,6 +390,65 @@
           menu.classList.toggle('hidden');
         }
       }
+
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+          pageLanguage: 'en',
+          includedLanguages: 'en,es,fr,de,ru,ar,hi',
+          layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+          autoDisplay: false
+        }, 'google_translate_element');
+      }
+
+      // Toggle translation selector menu
+      function toggleLangDropdown() {
+        const menu = document.getElementById('langDropdownMenu');
+        if (menu) {
+          menu.classList.toggle('show');
+        }
+      }
+
+      // Triggers custom Google Translate cookie state and updates parameters
+      function changeLanguage(langCode) {
+        const domain = window.location.hostname;
+        document.cookie = `googtrans=/en/${langCode}; path=/; domain=${domain}`;
+        document.cookie = `googtrans=/en/${langCode}; path=/; domain=.timetablecreator.online`;
+        document.cookie = `googtrans=/en/${langCode}; path=/`; // Local fallback
+        
+        const url = new URL(window.location.href);
+        if (langCode === 'en') {
+          url.searchParams.delete('lang');
+        } else {
+          url.searchParams.set('lang', langCode);
+        }
+        window.location.href = url.toString();
+      }
+
+      // Close language dropdown if clicking outside
+      window.addEventListener('click', function(e) {
+        const container = document.querySelector('.lang-dropdown-container');
+        const menu = document.getElementById('langDropdownMenu');
+        if (container && !container.contains(e.target) && menu) {
+          menu.classList.remove('show');
+        }
+      });
+
+      // Synchronize cookie if ?lang= is present
+      const urlParams = new URLSearchParams(window.location.search);
+      const queryLang = urlParams.get('lang');
+      if (queryLang) {
+        document.cookie = `googtrans=/en/${queryLang}; path=/`;
+      }
+
+      // Dynamic script injector for Google Translate
+      (function() {
+        var gt = document.createElement('script');
+        gt.type = 'text/javascript';
+        gt.async = true;
+        gt.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+        document.getElementsByTagName('head')[0].appendChild(gt);
+      })();
     </script>
+    <div id="google_translate_element" style="display: none !important;"></div>
   </body>
 </html>

@@ -5,14 +5,24 @@ import fs from "fs";
 import multer from "multer";
 import { GoogleGenAI, Type } from "@google/genai";
 
-const ai = new GoogleGenAI({
-  apiKey: process.env.GEMINI_API_KEY,
-  httpOptions: {
-    headers: {
-      "User-Agent": "aistudio-build",
-    },
-  },
-});
+let aiClient: GoogleGenAI | null = null;
+function getAi(): GoogleGenAI {
+  if (!aiClient) {
+    const key = process.env.GEMINI_API_KEY;
+    if (!key) {
+      throw new Error("GEMINI_API_KEY environment variable is required");
+    }
+    aiClient = new GoogleGenAI({
+      apiKey: key,
+      httpOptions: {
+        headers: {
+          "User-Agent": "aistudio-build",
+        },
+      },
+    });
+  }
+  return aiClient;
+}
 
 async function startServer() {
   const anonymityApp = express();
@@ -133,8 +143,8 @@ async function startServer() {
       const gridStartTime = config?.startTime || 480;
       const gridEndTime = config?.endTime || 1140;
 
-      const response = await ai.models.generateContent({
-        model: "gemini-3.6-flash",
+      const response = await getAi().models.generateContent({
+        model: "gemini-2.5-flash",
         contents: `You are an expert academic schedule generator. Generate a list of weekly schedule events based on the user request.
 User Prompt: "${prompt}"
 
@@ -197,8 +207,8 @@ Pick a color for each event from this standard list:
         return res.status(400).json({ error: "Title is required" });
       }
 
-      const response = await ai.models.generateContent({
-        model: "gemini-3.6-flash",
+      const response = await getAi().models.generateContent({
+        model: "gemini-2.5-flash",
         contents: `Provide realistic school or work schedule details based on the event title: "${title}".
 If any details are already partially filled, preserve them or enhance them:
 - subject: ${subject || ''}

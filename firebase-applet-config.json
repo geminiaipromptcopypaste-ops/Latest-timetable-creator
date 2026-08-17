@@ -3,8 +3,10 @@
   "appId": "1:929032079926:web:5fffd5a793370527a32697",
   "apiKey": "AIzaSyAqgZ5JoUZFDLi6fLomewejLNskIDDuKbQ",
   "authDomain": "gen-lang-client-0468016360.firebaseapp.com",
-  "firestoreDatabaseId": "ai-studio-7df758c8-1612-49a8-b19c-4932c21e67cf",
+  "firestoreDatabaseId": "ai-studio-timetablecreator-f889704d-8a8d-494c-aac9-d7009da59104",
   "storageBucket": "gen-lang-client-0468016360.firebasestorage.app",
   "messagingSenderId": "929032079926",
-  "measurementId": ""
+  "measurementId": "",
+  "oAuthClientId": "929032079926-ev55kamli1clri5kff6bid5jpofajsio.apps.googleusercontent.com",
+  "recaptchaSiteKey": ""
 }

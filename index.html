@@ -59,7 +59,7 @@
           "name": "How does the AI timetable creator work?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Simply type your routine or schedule requests in natural language inside the AI prompt bar, and our integrated Gemini logic will intelligently draft classes, labs, and breaks directly onto open spots in your calendar."
+            "text": "Simply type your routine or schedule requests in natural language inside the AI prompt bar, and our integrated AI logic will intelligently draft classes, labs, and breaks directly onto open spots in your calendar."
           }
         },
         {
@@ -83,7 +83,7 @@
           "name": "Is the school timetable maker online optimized for mobiles?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. The application features a responsive sidebar configuration, custom touch-friendly cards, and a mobile day selector to manage your weekly planners seamlessly on tablets and smartphones."
+            "text": "Yes. The application features a unified weekly horizontal swipe timetable layout with a sticky time column, responsive sidebar, and custom touch-friendly cards so you can view all days together without switching tabs."
           }
         },
         {
@@ -570,21 +570,27 @@
         position: sticky;
         top: 0;
         background-color: var(--bg-card);
-        z-index: 5;
-        border-bottom: 2px solid var(--border-color);
+        z-index: 20;
+        border-bottom: 1px solid var(--border-color);
       }
 
       .grid-corner {
-        width: 80px;
-        min-width: 80px;
+        width: 76px;
+        min-width: 76px;
         border-right: 1px solid var(--border-color);
         display: flex;
         align-items: center;
         justify-content: center;
         font-weight: 600;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
         color: var(--text-muted);
         background-color: var(--bg-panel);
-        border-radius: var(--border-radius) 0 0 0;
+        position: sticky;
+        left: 0;
+        top: 0;
+        z-index: 30;
       }
 
       .day-column-header {
@@ -595,7 +601,7 @@
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.05em;
-        font-size: 12px;
+        font-size: 11px;
         color: var(--text-main);
         border-right: 1px solid var(--border-color);
         background-color: var(--bg-panel);
@@ -603,7 +609,7 @@
       }
 
       .day-column-header.weekend {
-        background-color: rgba(var(--text-muted), 0.05);
+        background-color: rgba(148, 163, 184, 0.08);
       }
 
       .grid-body {
@@ -613,13 +619,13 @@
 
       /* Time Column indicators */
       .time-column {
-        width: 80px;
-        min-width: 80px;
+        width: 76px;
+        min-width: 76px;
         position: sticky;
         left: 0;
-        background-color: var(--bg-card);
-        z-index: 4;
-        border-right: 2px solid var(--border-color);
+        background-color: var(--bg-panel);
+        z-index: 15;
+        border-right: 1px solid var(--border-color);
       }
 
       .time-cell {
@@ -632,7 +638,7 @@
         color: var(--text-muted);
         border-bottom: 1px solid var(--border-color);
         background-color: var(--bg-panel);
-        font-weight: 500;
+        font-weight: 600;
       }
 
       /* The Grid cells overlay area */
@@ -1150,6 +1156,16 @@
           padding: 0 12px;
           gap: 8px;
           height: 56px;
+          overflow-x: auto;
+          overflow-y: hidden;
+          -webkit-overflow-scrolling: touch;
+          justify-content: flex-start;
+          flex-wrap: nowrap;
+          scrollbar-width: none;
+        }
+
+        .top-bar::-webkit-scrollbar {
+          display: none;
         }
 
         .workspace {
@@ -1168,80 +1184,65 @@
         }
 
         .mobile-day-selector {
-          display: flex;
+          display: none !important;
         }
 
-        /* Responsive Timetable Transformation */
-        .timetable-wrapper.mobile-single-day {
-          min-width: unset !important;
-          width: 100% !important;
-          display: flex !important;
-          flex-direction: column !important;
-          box-shadow: var(--shadow-md);
-          min-height: 500px !important;
+        /* Combined Full-Week Horizontal Swipe Timetable Layout on Mobile */
+        .workspace {
+          padding: 12px 8px;
+          display: block;
+          overflow-x: hidden;
+          overflow-y: auto;
+          -webkit-overflow-scrolling: touch;
         }
 
-        .timetable-wrapper.mobile-single-day .grid-header-row {
-          display: flex !important;
-          width: 100% !important;
-          position: sticky;
-          top: 0;
-          z-index: 5;
+        .timetable-scroll-container {
+          width: 100%;
+          overflow-x: auto;
+          overflow-y: hidden;
+          -webkit-overflow-scrolling: touch;
+          margin-bottom: 16px;
         }
 
-        .timetable-wrapper.mobile-single-day .grid-body {
-          display: flex !important;
-          width: 100% !important;
+        .timetable-wrapper {
+          min-width: max-content !important;
+          width: max-content !important;
+          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+          border-radius: 10px;
+          margin: 0;
         }
 
-        .timetable-wrapper.mobile-single-day .grid-corner {
-          width: 70px;
-          min-width: 70px;
-        }
-
-        .timetable-wrapper.mobile-single-day .time-column {
-          width: 70px;
-          min-width: 70px;
-        }
-
-        .timetable-wrapper.mobile-single-day .grid-columns-container {
-          display: flex !important;
-          flex: 1 !important;
-          width: calc(100% - 70px) !important;
-        }
-
-        /* Day column filtering standard behavior on responsive */
-        .timetable-wrapper.mobile-single-day .grid-day-column {
-          display: none;
-        }
-
-        .timetable-wrapper.mobile-single-day .grid-day-column.mobile-active-day-col {
+        .day-column-header, .grid-day-column {
+          width: var(--col-width, 135px) !important;
+          min-width: 130px !important;
           display: block !important;
-          flex: 1 !important;
-          width: 100% !important;
-          min-width: unset !important;
         }
 
-        .timetable-wrapper.mobile-single-day .day-column-header {
-          display: none;
-        }
-
-        .timetable-wrapper.mobile-single-day .day-column-header.mobile-active-day-hdr {
-          display: block !important;
-          flex: 1 !important;
-          width: 100% !important;
-          min-width: unset !important;
+        .grid-corner, .time-column {
+          width: 70px !important;
+          min-width: 70px !important;
         }
 
         /* Make modal editor forms column-ordered on narrow screens */
+        .modal-overlay {
+          align-items: flex-end;
+          padding: 0;
+        }
+
         .modal-panel {
-          width: 95%;
-          max-height: 95vh;
+          width: 100% !important;
+          max-height: 90vh !important;
+          border-bottom-left-radius: 0;
+          border-bottom-right-radius: 0;
+          overflow-y: auto;
+          -webkit-overflow-scrolling: touch;
         }
 
         .modal-body {
-          padding: 14px;
+          padding: 16px;
           gap: 12px;
+          max-height: calc(90vh - 120px);
+          overflow-y: auto;
         }
 
         .flex-half {
@@ -2375,22 +2376,6 @@
 
           <!-- Right side tools -->
           <div class="toolbar-group">
-            <button class="action-btn btn-labeled" onclick="app.handlers.printTimetable()" data-tooltip="Save or Print as PDF" aria-label="Save or Print as PDF">
-              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="16"><path d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
-              <span class="btn-label-text">Save PDF</span>
-            </button>
-            <button class="action-btn btn-labeled" onclick="app.handlers.exportJson()" data-tooltip="Export Backup JSON" aria-label="Export Backup JSON">
-              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="16"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-              <span class="btn-label-text">Save JSON</span>
-            </button>
-            <button class="action-btn btn-labeled" onclick="app.handlers.downloadPng()" data-tooltip="Export PNG Image" aria-label="Export PNG Image">
-              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="16"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-              <span class="btn-label-text">PNG</span>
-            </button>
-            <button class="action-btn btn-labeled" onclick="app.handlers.shareSchedule()" id="btnShareSchedule" data-tooltip="Publish and Share Link" aria-label="Publish and Share Link">
-              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="16"><path d="M8.684 10.742L15.32 7.424M15.32 16.576l-6.637-3.318M21 12a3 3 0 11-6 0 3 3 0 016 0zm-11-6a3 3 0 11-6 0 3 3 0 016 0zm0 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-              <span class="btn-label-text">Share</span>
-            </button>
             <button class="action-btn btn-labeled" onclick="app.handlers.resetSchedule()" id="btnResetSchedule" style="color: #ef4444;" data-tooltip="Reset Timetable" aria-label="Reset Timetable">
               <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="16"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
               <span class="btn-label-text" style="color: #ef4444;">Reset</span>
@@ -2431,11 +2416,10 @@
         <!-- GRID SYSTEM WORKSPACE -->
         <div class="workspace" id="gridWorkspace" onscroll="app.handlers.handleScroll()">
           
-          <!-- AI Credits Display Banner (dynamic) -->
-          <div id="aiCreditsBanner" style="margin-bottom: 12px; font-family: var(--font-sans);"></div>
+
 
           <!-- AI Schedule Generator -->
-          <div class="section-card" id="aiGeneratorSection" style="margin-bottom: 20px; border: 1px solid rgba(59, 130, 246, 0.3); background: linear-gradient(180deg, var(--bg-card) 0%, rgba(59, 130, 246, 0.02) 100%); max-width: 100%; box-shadow: var(--shadow-sm); padding: 16px;">
+          <div class="section-card" id="aiGeneratorSection" style="margin-bottom: 16px; border: 1px solid rgba(59, 130, 246, 0.3); background: linear-gradient(180deg, var(--bg-card) 0%, rgba(59, 130, 246, 0.02) 100%); max-width: 100%; box-shadow: var(--shadow-sm); padding: 16px;">
             <div class="ai-generator-inner" style="display: flex; gap: 16px; align-items: center; width: 100%; flex-wrap: wrap;">
               
               <!-- Left side description -->
@@ -2447,7 +2431,7 @@
                   </span>
                 </div>
                 <p style="font-size: 11px; color: var(--text-muted); line-height: 1.4; margin: 0;">
-                  Describe your classes, study hours, or lunch times. Gemini will auto-schedule them into open spots.
+                  Describe your classes, study hours, or lunch times. The AI will auto-schedule them into open spots.
                 </p>
               </div>
 
@@ -2468,29 +2452,54 @@
 
             </div>
           </div>
-          
-          <!-- Mobile Day Selector (Mobile Only) -->
-          <div class="mobile-day-selector" id="mobileDaySelector"></div>
 
-          <div class="timetable-wrapper" id="printTarget">
-            
-            <!-- STICKY HEADER -->
-            <div class="grid-header-row" id="gridHeaderRow">
-              <div class="grid-corner">Time</div>
-              <!-- Day headers injected live by javascript -->
+          <!-- Export, Print & Share Options Bar -->
+          <div class="section-card" style="margin-bottom: 20px; padding: 12px 16px; background: var(--bg-card); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+            <div style="font-size: 12px; font-weight: 600; color: var(--text-main); display: flex; align-items: center; gap: 6px;">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="16" height="16" style="color: var(--primary-color);"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+              Export & Share Options
             </div>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+              <button class="btn-ctrl btn-secondary" onclick="app.handlers.printTimetable()" style="font-size: 11px; height: 32px; padding: 0 12px; display: flex; align-items: center; gap: 6px;">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="14"><path d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+                Save PDF
+              </button>
+              <button class="btn-ctrl btn-secondary" onclick="app.handlers.exportJson()" style="font-size: 11px; height: 32px; padding: 0 12px; display: flex; align-items: center; gap: 6px;">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="14"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                Save JSON
+              </button>
+              <button class="btn-ctrl btn-secondary" onclick="app.handlers.downloadPng()" style="font-size: 11px; height: 32px; padding: 0 12px; display: flex; align-items: center; gap: 6px;">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="14"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                PNG
+              </button>
+              <button class="btn-ctrl btn-primary" onclick="app.handlers.shareSchedule()" id="btnShareSchedule" style="font-size: 11px; height: 32px; padding: 0 14px; display: flex; align-items: center; gap: 6px;">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="14"><path d="M8.684 10.742L15.32 7.424M15.32 16.576l-6.637-3.318M21 12a3 3 0 11-6 0 3 3 0 016 0zm-11-6a3 3 0 11-6 0 3 3 0 016 0zm0 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                Share
+              </button>
+            </div>
+          </div>
 
-            <!-- GRID BODY -->
-            <div class="grid-body">
-              <!-- Sticky Left Time Column -->
-              <div class="time-column" id="gridTimeColumn"></div>
-
-              <!-- Day Column Overlays -->
-              <div class="grid-columns-container" id="gridColumnsContainer">
-                <!-- Visual absolute event cards elements injected here -->
+          <div class="timetable-scroll-container">
+            <div class="timetable-wrapper" id="printTarget">
+              
+              <!-- STICKY HEADER -->
+              <div class="grid-header-row" id="gridHeaderRow">
+                <div class="grid-corner">Time</div>
+                <!-- Day headers injected live by javascript -->
               </div>
-            </div>
 
+              <!-- GRID BODY -->
+              <div class="grid-body">
+                <!-- Sticky Left Time Column -->
+                <div class="time-column" id="gridTimeColumn"></div>
+
+                <!-- Day Column Overlays -->
+                <div class="grid-columns-container" id="gridColumnsContainer">
+                  <!-- Visual absolute event cards elements injected here -->
+                </div>
+              </div>
+
+            </div>
           </div>
 
           <!-- === SEO LANDING SECTION === -->
@@ -2671,7 +2680,7 @@
                 <details class="seo-faq-item">
                   <summary class="seo-faq-question">How does the AI timetable creator work?</summary>
                   <div class="seo-faq-answer">
-                    Simply type your routine or schedule requests in natural language inside the AI prompt bar, and our integrated Gemini logic will intelligently draft classes, labs, and breaks directly onto open spots in your calendar.
+                    Simply type your routine or schedule requests in natural language inside the AI prompt bar, and our integrated AI logic will intelligently draft classes, labs, and breaks directly onto open spots in your calendar.
                   </div>
                 </details>
 
@@ -2909,7 +2918,7 @@
 
           <!-- Submit Action Button -->
           <button id="btnAuthSubmit" class="btn-ctrl btn-primary" onclick="app.handlers.submitEmailAuth()" style="width: 100%; height: 42px; font-size: 13px; font-weight: 600; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
-            Login
+            Sign In
           </button>
 
           <!-- Divider -->
@@ -3583,9 +3592,9 @@
           window.addEventListener('pointermove', (e) => this.dragMove(e));
           window.addEventListener('pointerup', (e) => this.dragEnd(e));
           
-          // Window resize listener for mobile responsive update
+          // Window resize listener
           window.addEventListener('resize', () => {
-            this.applyMobileDayVisibility();
+            this.updateCurrentTimeIndicator();
           });
 
           // Disable default window context menus in grid spaces
@@ -3658,72 +3667,7 @@
          */
         render() {
           this.renderGridStructure();
-          this.renderMobileDaySelector();
-          this.applyMobileDayVisibility();
           this.renderEventsOnly();
-          this.updateCurrentTimeIndicator();
-        },
-
-        renderMobileDaySelector() {
-          const selector = document.getElementById('mobileDaySelector');
-          if (!selector) return;
-
-          selector.innerHTML = '';
-          const dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-          const activeDaysCount = parseInt(this.state.config.daysCount);
-
-          if (this.state.activeMobileDay === undefined || this.state.activeMobileDay >= activeDaysCount) {
-            this.state.activeMobileDay = 0;
-          }
-
-          for (let i = 0; i < activeDaysCount; i++) {
-            const tab = document.createElement('div');
-            tab.className = `mobile-day-tab ${i === this.state.activeMobileDay ? 'active' : ''}`;
-            tab.textContent = dayNames[i];
-            tab.onclick = () => {
-              this.state.activeMobileDay = i;
-              this.applyMobileDayVisibility();
-              this.renderMobileDaySelector();
-            };
-            selector.appendChild(tab);
-          }
-        },
-
-        applyMobileDayVisibility() {
-          const wrapper = document.getElementById('printTarget');
-          if (!wrapper) return;
-
-          const isMobile = window.innerWidth <= 768;
-          if (isMobile) {
-            wrapper.classList.add('mobile-single-day');
-            
-            const activeDaysCount = parseInt(this.state.config.daysCount);
-            if (this.state.activeMobileDay === undefined || this.state.activeMobileDay >= activeDaysCount) {
-              this.state.activeMobileDay = 0;
-            }
-
-            for (let i = 0; i < 7; i++) {
-              const col = document.getElementById(`col-day-${i}`);
-              const hdr = document.getElementById(`hdr-day-${i}`);
-              
-              if (col) {
-                if (i === this.state.activeMobileDay) {
-                  col.classList.add('mobile-active-day-col');
-                } else {
-                  col.classList.remove('mobile-active-day-col');
-                }
-              }
-              if (hdr) {
-                if (i === this.state.activeMobileDay) {
-                  hdr.classList.add('mobile-active-day-hdr');
-                } else {
-                  hdr.classList.remove('mobile-active-day-hdr');
-                }
-              }
-            }
-          } else {
-            wrapper.classList.remove('mobile-single-day');
-          }
           this.updateCurrentTimeIndicator();
         },
 
@@ -4440,21 +4384,6 @@
               return;
             }
 
-            // Authentication Guard
-            const currentUser = auth ? auth.currentUser : null;
-            if (auth && !currentUser) {
-              app.showToast('Please register or sign in to use the AI Intelligent Scheduler.', 'error');
-              this.openAuthModal();
-              return;
-            }
-
-            // Credit Balance Guard
-            const currentCredits = app.state.aiCredits !== null ? app.state.aiCredits : 2;
-            if (currentCredits <= 0) {
-              app.showToast('You have run out of AI Scheduler credits! (Limit is 2 per user)', 'error');
-              return;
-            }
-
             const btnMerge = document.getElementById('btnAiMerge');
             const btnOvertake = document.getElementById('btnAiOvertake');
             if (btnMerge) { btnMerge.disabled = true; btnMerge.textContent = 'Merging...'; }
@@ -4463,13 +4392,6 @@
             app.showToast('AI is generating schedule...', 'info');
 
             try {
-              // Deduct credit first to secure the operation limits
-              const deducted = await app.decrementUserCredit();
-              if (!deducted) {
-                app.showToast('Failed to verify AI Scheduler credits limit or no credits remaining.', 'error');
-                return;
-              }
-
               const response = await fetch('/api/schedule/generate', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -4550,7 +4472,7 @@
               Auto-filling...
             `;
 
-            app.showToast('Asking Gemini for details...', 'info');
+            app.showToast('Asking AI for details...', 'info');
 
             // Gather any existing fields that may have been filled
             const payload = {

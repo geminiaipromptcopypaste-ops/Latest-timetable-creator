@@ -31,6 +31,20 @@ async function startServer() {
   anonymityApp.use(express.json());
   const upload = multer();
 
+  // Enable CORS for all domains
+  anonymityApp.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, PATCH");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization"
+    );
+    if (req.method === "OPTIONS") {
+      return res.sendStatus(200);
+    }
+    next();
+  });
+
   // Simple JSON-based database for shared timetables
   const dbFile = path.join(process.cwd(), 'timetables_db.json');
   function readDb() {

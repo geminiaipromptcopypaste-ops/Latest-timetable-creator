@@ -3124,6 +3124,9 @@
 
     <!-- CODE SCRIPT EXECUTOR MODULE -->
     <script type="module">
+      // API Base URL - Configured to Vercel deployment with cross-origin CORS support
+      const API_BASE_URL = 'https://latest-timetable-creator.vercel.app';
+
       // Let Firebase services build gracefully and dynamically
       let db = null;
       let auth = null;
@@ -4431,7 +4434,7 @@
             app.showToast('AI is generating schedule...', 'info');
 
             try {
-              const response = await fetch('/api/schedule/generate', {
+              const response = await fetch(`${API_BASE_URL}/api/schedule/generate`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -4524,7 +4527,7 @@
             };
 
             try {
-              const response = await fetch('/api/schedule/autocomplete', {
+              const response = await fetch(`${API_BASE_URL}/api/schedule/autocomplete`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
